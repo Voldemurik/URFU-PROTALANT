@@ -1,0 +1,32 @@
+# Пример конфигурации techdoc-assistant.
+# Скопируйте в config.yaml и передавайте через `techdoc <команда> -c config.yaml`.
+# Любой параметр можно опустить — подставится значение по умолчанию.
+
+ollama:
+  host: http://localhost:11434   # адрес локального сервера Ollama
+  timeout: 600.0                 # секунд; первая загрузка модели в память бывает долгой
+
+embeddings:
+  model: bge-m3                  # многоязычная модель эмбеддингов; альтернативы: qwen3-embedding:0.6b, nomic-embed-text-v2-moe
+  batch_size: 16
+
+llm:
+  model: qwen3.5:9b              # для слабых машин: qwen3.5:4b; для мощных: qwen3.5:27b, gemma4:12b
+  temperature: 0.1               # низкая температура = более предсказуемые ответы
+  num_ctx: 8192                  # контекстное окно в токенах (top_k × chunk_size должно помещаться)
+  think: false                   # выключить режим рассуждений «думающих» моделей (быстрее)
+  max_tokens: 1024
+
+chunking:
+  chunk_size: 900                # символов в фрагменте
+  chunk_overlap: 150             # перекрытие соседних фрагментов
+  min_chunk_size: 80             # короче — приклеивается к предыдущему
+
+retrieval:
+  top_k: 5                       # сколько фрагментов попадает в промпт
+  candidates: 20                 # кандидатов из каждого поиска до слияния
+  hybrid: true                   # векторный + BM25 (Reciprocal Rank Fusion)
+  rrf_k: 60
+  min_score: 0.0                 # отсечка по RRF-скору; шкала мала: максимум 2/(rrf_k+1) ≈ 0.033, обычно 0.01–0.03
+
+index_dir: storage/index         # где хранится индекс

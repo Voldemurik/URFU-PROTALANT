@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "techdoc-assistant"
+version = "0.1.0"
+description = "Локальный LLM-ассистент по технической документации: RAG-пайплайн, гибридный поиск и собственная система оценки качества ответов. Проект программы «ПроТалант» УрФУ 2026–2027."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Voldemurik" }]
+keywords = ["rag", "llm", "ollama", "retrieval", "technical-documentation", "local-ai", "evaluation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: Russian",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Indexing",
+]
+dependencies = [
+    "numpy>=1.24",
+    "requests>=2.31",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+faiss = ["faiss-cpu>=1.7.4"]
+pdf = ["pypdf>=3.17"]
+docx = ["python-docx>=1.1"]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+train = [
+    "torch>=2.2",
+    "transformers>=4.45",
+    "peft>=0.10",
+    "datasets>=2.18",
+    "accelerate>=0.28",
+]
+all = ["techdoc-assistant[faiss,pdf,docx,dev]"]
+
+[project.scripts]
+techdoc = "techdoc_assistant.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Voldemurik/URFU-PROTALANT"
+Repository = "https://github.com/Voldemurik/URFU-PROTALANT"
+Issues = "https://github.com/Voldemurik/URFU-PROTALANT/issues"
+"Программа ПроТалант" = "https://protalant.urfu.ru/"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+techdoc_assistant = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests", "training"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["techdoc_assistant"]
