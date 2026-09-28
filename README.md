@@ -217,7 +217,7 @@ P.S: был взят в отбор на программу на первом э�
 
 ## Об авторе
 
-**Voldemurik** — первокурсник УрФУ, 2026 год поступления. GitHub: [@Voldemurik](https://github.com/Voldemurik).
+**Voldemurik** — первокурсник УрФУ, студент ИРИТ-РтФ, участник программы ТОП-уровня ИИ (ТОП-ИИ) от Минцифры РФ, 2026 год поступления. GitHub: [@Voldemurik](https://github.com/Voldemurik).
 
 <details>
 <summary><b>Индивидуальные достижения</b></summary>
