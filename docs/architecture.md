@@ -121,7 +121,7 @@ flowchart LR
 
 ## Точки расширения
 
-- **Другой движок LLM** (llama.cpp, vLLM, LM Studio): реализовать класс с методом
+- **Другой движок LLM** (llama.cpp, vLLM, LM Studio, OpenRouter): реализовать класс с методом
   `generate(system, user)`.
 - **Переранжирование**: кросс-энкодер (`bge-reranker-v2-m3`) поверх кандидатов RRF.
 - **Морфология**: стемминг/лемматизация в `lexical.tokenize` для русского.
