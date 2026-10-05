@@ -2,7 +2,7 @@
 
 Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии — [SemVer](https://semver.org/lang/ru/).
 
-## [Unreleased]
+## Unreleased
 
 ### Планируется
 - Оценка на реальной документации индустриального партнёра.
