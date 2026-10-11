@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/Voldemurik/URFU-PROTALANT/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Voldemurik/URFU-PROTALANT/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/Voldemurik/URFU-PROTALANT/releases"><img alt="Релиз" src="https://img.shields.io/github/v/release/Voldemurik/URFU-PROTALANT?display_name=tag&sort=semver"></a>
+  <a href="https://github.com/Voldemurik/URFU-PROTALANT/releases"><img alt="[Релиз](https://github.com/Voldemurik/URFU-PROTALANT/releases/tag/v1.1.1)" src="https://img.shields.io/github/v/release/Voldemurik/URFU-PROTALANT?display_name=tag&sort=semver"></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="Ollama" src="https://img.shields.io/badge/LLM-Ollama%20%C2%B7%20local-000000">
   <img alt="Ruff" src="https://img.shields.io/badge/code%20style-ruff-261230">
