@@ -34,5 +34,5 @@
 - незначительные изменения и корректировки репозитория (кликабельность ссылок, уточнение dead-лайнов)
 
 ## 1.1.1 — 11.10.2026
-- Реализация этапа 1 шага 1: добавлены [бейджи в шапке](), описание и topics в README.
-- [Унификация целевой модели]() между README и [контуром обучения]().
+- Реализация [этапа 1 шага 1](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/plan-rabot.md): добавлены [бейджи в шапке](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/README.md), описание и topics в README.
+- Унификация целевой модели между README и [контуром обучения](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/config.example.yaml).
