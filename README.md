@@ -11,11 +11,12 @@
 
 <p align="center">
   <a href="https://github.com/Voldemurik/URFU-PROTALANT/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Voldemurik/URFU-PROTALANT/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/Voldemurik/URFU-PROTALANT/releases"><img alt="Релиз" src="https://img.shields.io/github/v/release/Voldemurik/URFU-PROTALANT?display_name=tag&sort=semver"></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="Ollama" src="https://img.shields.io/badge/LLM-Ollama%20%C2%B7%20local-000000">
   <img alt="Ruff" src="https://img.shields.io/badge/code%20style-ruff-261230">
   <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
-  <img alt="Status" src="https://img.shields.io/badge/status-MVP%20%C2%B7%20этап%200-orange">
+  <img alt="Status" src="https://img.shields.io/badge/status-этап%201%20%C2%B7%20запуск%20на%20реальной%20модели-yellow">
 </p>
 
 <p align="center">
@@ -61,7 +62,7 @@ flowchart LR
     V --> R
     B --> R
     R --> P[Промпт<br/>с контекстом]
-    P --> M[Локальная LLM<br/>qwen3.5]
+    P --> M[Локальная LLM<br/>qwen2.5:7b-instruct]
     M --> A[Ответ + ссылки<br/>или отказ]
     A --> X[Метрики<br/>качества]
 ```
@@ -78,9 +79,9 @@ flowchart LR
 Нужны Python 3.10+ и [Ollama](https://ollama.com/download).
 
 ```bash
-# 1. Модели (скачиваются один раз; ~7 ГБ)
+# 1. Модели (скачиваются один раз; ~6 ГБ)
 ollama pull bge-m3
-ollama pull qwen3.5:9b        # для слабых машин: qwen3.5:4b
+ollama pull qwen2.5:7b-instruct        # для слабых машин: qwen2.5:3b-instruct
 
 # 2. Установка
 git clone https://github.com/Voldemurik/URFU-PROTALANT.git
@@ -98,8 +99,12 @@ techdoc ask "Что делать при ошибке E12 на станке ФС-
 techdoc chat                  # интерактивный режим
 
 # 5. Оценка качества на учебном наборе
-techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen9b.md
+techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen7b.md
 ```
+
+> Модель по умолчанию — `qwen2.5:7b-instruct` — совпадает с базовой моделью контура дообучения
+> LoRA ([training/README.md](training/README.md), базовая модель `Qwen/Qwen2.5-7B-Instruct`):
+> адаптер, обученный на этапе 2, подключается к ней без смены «боевой» модели.
 
 Так выглядит ответ `techdoc ask` (формат ответа; формулировки зависят от модели):
 
@@ -197,7 +202,7 @@ URFU-PROTALANT/
 |---|---|---|
 | Язык | Python 3.10+ | стандарт для ML, минимум зависимостей: `numpy`, `requests`, `PyYAML` |
 | Запуск моделей | [Ollama](https://ollama.com/) | одна команда для установки и запуска LLM на CPU/GPU, HTTP API |
-| LLM | `qwen3.5:9b` (по умолчанию), `qwen3.5:4b`, `gemma4:12b` | сильный русский, длинный контекст, работают на потребительских GPU |
+| LLM | `qwen2.5:7b-instruct` (по умолчанию), `qwen2.5:3b-instruct`, `gemma3:12b` | сильный русский, длинный контекст, работают на потребительских GPU; модель по умолчанию совпадает с базовой моделью контура дообучения LoRA |
 | Эмбеддинги | `bge-m3` | многоязычная, проверена на русском; альтернатива `qwen3-embedding` |
 | Векторный поиск | FAISS (`IndexFlatIP`) или NumPy | точный поиск, нулевая инфраструктура |
 | Лексический поиск | BM25 (свой, ~100 строк) | прозрачность; точные коды и артикулы |
