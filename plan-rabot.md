@@ -56,7 +56,7 @@
 
 **Ожидаемый результат:** рост recall\@k и MRR по сравнению с бейзлайном, ссылки в ответах ведут на конкретную страницу документа.
 
-**Планируемый артефакт:** код улучшений и таблица «до/после» по каждому эксперименту в [`docs/evaluation.md`](https://github.com/Voldemurik/URFU-PROTALANT).
+**Планируемый артефакт:** код улучшений и таблица «до/после» по каждому эксперименту в [`docs/evaluation.md`](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/docs/evaluation.md).
 
 **Шаги:**
 
