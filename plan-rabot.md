@@ -120,7 +120,7 @@
 
 **Ожидаемый результат:** обученный LoRA-адаптер; сравнение метрик до/после на отложенной выборке по той же системе оценки; решение «принять/откатить» по цифрам.
 
-**Планируемый артефакт:** LoRA-адаптер + таблица метрик до/после в [docs/evaluation.md](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/docs/evaluation.md), обновлённый training/README.md.
+**Планируемый артефакт:** LoRA-адаптер + таблица метрик до/после в [docs/evaluation.md](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/docs/evaluation.md), обновлённый [training/README.md](https://github.com/Voldemurik/URFU-PROTALANT/blob/main/training/README.md).
 
 **Шаги:**
 
