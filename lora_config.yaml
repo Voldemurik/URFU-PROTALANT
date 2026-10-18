@@ -1,0 +1,30 @@
+# Конфигурация дообучения LoRA (этап 2 программы, февраль–июнь 2027).
+# LoRA (Low-Rank Adaptation) — дообучение небольших «добавочных» матриц
+# вместо всех весов модели: хватает одной потребительской видеокарты.
+
+base_model: Qwen/Qwen3.5-9B   # базовая модель с Hugging Face; в Ollama ей соответствует qwen3.5:9b
+                                       # (адаптер работает только с той же самой моделью — см. training/README.md)
+dataset: training/data/sft.jsonl        # результат prepare_sft_dataset.py
+output_dir: training/output/lora-techdoc
+
+max_seq_len: 4096
+epochs: 2
+learning_rate: 1.0e-4
+batch_size: 2
+gradient_accumulation: 8
+warmup_ratio: 0.05
+weight_decay: 0.0
+logging_steps: 10
+save_steps: 200
+seed: 42
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  # ВНИМАНИЕ: у Qwen3.5 новая архитектура (qwen3_5). Перед обучением на этапе 6
+  # выполните dry-run: если имена модулей не совпадут, PEFT выведет доступные.
+
+quantization:
+  load_in_4bit: true   # QLoRA: базовая модель в 4 битах, адаптеры — в bf16 (нужен bitsandbytes)
