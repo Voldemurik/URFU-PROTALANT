@@ -62,7 +62,7 @@ flowchart LR
     V --> R
     B --> R
     R --> P[Промпт<br/>с контекстом]
-    P --> M[Локальная LLM<br/>qwen2.5:7b-instruct]
+    P --> M[Локальная LLM<br/>qwen3.5:9b]
     M --> A[Ответ + ссылки<br/>или отказ]
     A --> X[Метрики<br/>качества]
 ```
@@ -81,7 +81,7 @@ flowchart LR
 ```bash
 # 1. Модели (скачиваются один раз; ~6 ГБ)
 ollama pull bge-m3
-ollama pull qwen2.5:7b-instruct        # для слабых машин: qwen2.5:3b-instruct
+ollama pull qwen3.5:9b              # для слабых машин: qwen3.5:4b
 
 # 2. Установка
 git clone https://github.com/Voldemurik/URFU-PROTALANT.git
@@ -102,8 +102,8 @@ techdoc chat                  # интерактивный режим
 techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen7b.md
 ```
 
-> Модель по умолчанию — `qwen2.5:7b-instruct` — совпадает с базовой моделью контура дообучения
-> LoRA ([training/README.md](training/README.md), базовая модель `Qwen/Qwen2.5-7B-Instruct`):
+> Модель по умолчанию — `qwen3.5:9b` — совпадает с базовой моделью контура дообучения
+> LoRA ([training/README.md](training/README.md), базовая модель `Qwen/Qwen3.5-9B`):
 > адаптер, обученный на этапе 2, подключается к ней без смены «боевой» модели.
 
 Так выглядит ответ `techdoc ask` (формат ответа; формулировки зависят от модели):
@@ -161,15 +161,20 @@ techdoc eval data/eval/sample_qa.jsonl --offline --report-md reports/baseline.md
 ```
 URFU-PROTALANT/
 ├── src/techdoc_assistant/     # пакет
+│   ├── documents.py           #   структуры данных: документ и фрагмент (чанк)
 │   ├── loaders.py             #   чтение TXT/MD/PDF/DOCX (с перебором кодировок)
 │   ├── chunking.py            #   структурное разбиение: заголовки, абзацы, таблицы
 │   ├── embeddings.py          #   эмбеддинги: Ollama + офлайн-заглушка
 │   ├── vector_store.py        #   векторный индекс (FAISS / NumPy), сохранение на диск
 │   ├── lexical.py             #   BM25 на чистом Python
 │   ├── retriever.py           #   гибридный поиск, Reciprocal Rank Fusion
+│   ├── ollama_client.py       #   тонкий HTTP-клиент Ollama (на requests)
+│   ├── llm.py                 #   интерфейс генеративных моделей (сейчас Ollama)
+│   ├── baselines.py           #   экстрактивный бейзлайн для сравнения с LLM
 │   ├── prompts.py             #   промпты ассистента и LLM-судьи
 │   ├── rag.py                 #   пайплайн: ingest / ask, извлечение ссылок
 │   ├── evaluation/            #   набор данных, метрики, судья, прогон и отчёты
+│   ├── config.py              #   конфигурация: dataclass'ы и загрузка YAML
 │   └── cli.py                 #   команды techdoc
 ├── data/sample_docs/          # учебные документы (вымышленные)
 ├── data/eval/sample_qa.jsonl  # оценочные вопросы
@@ -202,7 +207,7 @@ URFU-PROTALANT/
 |---|---|---|
 | Язык | Python 3.10+ | стандарт для ML, минимум зависимостей: `numpy`, `requests`, `PyYAML` |
 | Запуск моделей | [Ollama](https://ollama.com/) | одна команда для установки и запуска LLM на CPU/GPU, HTTP API |
-| LLM | `qwen2.5:7b-instruct` (по умолчанию), `qwen2.5:3b-instruct`, `gemma3:12b` | сильный русский, длинный контекст, работают на потребительских GPU; модель по умолчанию совпадает с базовой моделью контура дообучения LoRA |
+| LLM | `qwen3.5:9b` (по умолчанию), `qwen3.5:4b`, `gemma4:12b` | сильный русский, контекст 256K, мультимодальность (сканы и чертежи на этапе 5), работают на потребительских GPU; модель по умолчанию совпадает с базовой моделью контура дообучения LoRA |
 | Эмбеддинги | `bge-m3` | многоязычная, проверена на русском; альтернатива `qwen3-embedding` |
 | Векторный поиск | FAISS (`IndexFlatIP`) или NumPy | точный поиск, нулевая инфраструктура |
 | Лексический поиск | BM25 (свой, ~100 строк) | прозрачность; точные коды и артикулы |
