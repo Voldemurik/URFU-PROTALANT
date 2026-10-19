@@ -12,7 +12,7 @@ flowchart LR
     subgraph ingest["Индексация (techdoc ingest)"]
         D[Документы<br/>TXT · MD · PDF · DOCX] --> L[Загрузчик<br/>loaders.py]
         L --> C[Структурное разбиение<br/>chunking.py]
-        C --> E[Эмбеддинги<br/>Ollama · bge-m3]
+        C --> E[Эмбеддинги<br/>Ollama · qwen3-embedding:0.6b]
         E --> V[(Векторный индекс<br/>FAISS / NumPy)]
         C --> B[(BM25<br/>lexical.py)]
     end
