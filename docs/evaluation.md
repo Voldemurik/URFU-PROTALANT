@@ -101,6 +101,7 @@ Token-F1 — грубая метрика (перефразированный в�
 
 | Конфигурация | recall@k | must_include | cit. precision | trap refusal | judge faithfulness |
 |---|---|---|---|---|---|
+| qwen3-embedding:0.6b + qwen3.5:4b | — | — | — | — | — |
 | bge-m3 + qwen3.5:4b | — | — | — | — | — |
 | bge-m3 + qwen3.5:9b | — | — | — | — | — |
 | bge-m3 + gemma4:12b | — | — | — | — | — |
