@@ -27,7 +27,7 @@ class OllamaConfig:
 class EmbeddingConfig:
     """Модель эмбеддингов (векторных представлений текста)."""
 
-    model: str = "bge-m3"  # многоязычная, хорошо работает с русским
+    model: str = "qwen3-embedding:0.6b"  # многоязычная, лёгкая; хорошо работает с русским
     batch_size: int = 16
 
 
