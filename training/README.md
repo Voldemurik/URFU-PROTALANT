@@ -42,7 +42,7 @@ python training/train_lora.py --config training/lora_config.yaml
 
 Базовая модель для дообучения задаётся в `lora_config.yaml` (`Qwen/Qwen3.5-4B` с
 Hugging Face). Адаптер совместим только с **той же самой** моделью, поэтому для сравнения
-«до/после» в Ollama используется её точный аналог `qwen3.5-9b` (модель по умолчанию из config.example.yaml). Сравнивать нужно три конфигурации на одном наборе:
+«до/после» в Ollama используется её точный аналог `qwen3.5:4b` (модель по умолчанию из config.example.yaml). Сравнивать нужно три конфигурации на одном наборе:
 базовая модель без адаптера, базовая модель с адаптером и «боевая» модель приложения.
 
 Ollama подключает LoRA-адаптеры в формате GGUF через `Modelfile`. Адаптер PEFT (safetensors)
@@ -51,11 +51,11 @@ Ollama подключает LoRA-адаптеры в формате GGUF чер�
 ```bash
 # один раз: git clone https://github.com/ggml-org/llama.cpp
 python llama.cpp/convert_lora_to_gguf.py training/output/lora-techdoc \
-    --base Qwen/Qwen2.5-7B-Instruct --outfile training/output/lora-techdoc.gguf
+    --base Qwen/Qwen3.5-4B --outfile training/output/lora-techdoc.gguf
 ```
 
 ```
-FROM qwen2.5:7b-instruct
+FROM qwen3.5:4b
 ADAPTER ./training/output/lora-techdoc.gguf
 ```
 
