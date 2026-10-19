@@ -8,7 +8,7 @@ ollama:
 
 embeddings:
   model: bge-m3                  # многоязычная модель эмбеддингов; альтернативы: qwen3-embedding:0.6b, nomic-embed-text-v2-moe
-  batch_size: 16
+  batch_size: 4
 
 llm:
   model: qwen3.5:4b              # для более сильных машин qwen3.5:9b, qwen3.5:27b или gemma4:12b
