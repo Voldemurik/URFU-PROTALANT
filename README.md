@@ -80,7 +80,7 @@ flowchart LR
 
 ```bash
 # 1. Модели (скачиваются один раз; ~6 ГБ)
-ollama pull bge-m3
+ollama pull qwen3-embedding:0.6b
 ollama pull qwen3.5:4b              # для более мощных машин: qwen3.5:9b
 
 # 2. Установка
