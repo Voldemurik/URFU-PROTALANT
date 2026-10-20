@@ -35,7 +35,7 @@ class EmbeddingConfig:
 class LLMConfig:
     """Генеративная модель."""
 
-    model: str = "qwen3.5:4b"
+    model: str = "qwen3.5:0.8b"
     temperature: float = 0.1
     num_ctx: int = 8192  # размер контекстного окна в токенах
     think: bool = False  # для «думающих» моделей: отключаем цепочку рассуждений
