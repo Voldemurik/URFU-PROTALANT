@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "techdoc-assistant"
-version = "1.1.1"
+version = "1.1.2"
 description = "Локальный LLM-ассистент по технической документации: RAG-пайплайн, гибридный поиск и собственная система оценки качества ответов. Проект программы «ПроТалант» УрФУ 2026–2027."
 readme = "README.md"
 requires-python = ">=3.10"
