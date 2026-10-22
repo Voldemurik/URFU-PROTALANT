@@ -20,4 +20,4 @@ from techdoc_assistant.rag import Answer, RagPipeline
 
 __all__ = ["Answer", "Config", "RagPipeline", "__version__"]
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
