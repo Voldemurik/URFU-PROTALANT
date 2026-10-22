@@ -39,7 +39,12 @@ class FakeOllamaHandler(BaseHTTPRequestHandler):
         if self.path == "/api/version":
             self._send({"version": "0.test"})
         elif self.path == "/api/tags":
-            self._send({"models": [{"name": "bge-m3:latest"}, {"name": "qwen3.5:9b"}]})
+            self._send({"models": [
+                {"name": "bge-m3:latest"},
+                {"name": "qwen3.5:9b"},
+                {"name": "qwen3-embedding:0.6b"},
+                {"name": "qwen3.5:0.8b"},
+            ]})
         else:
             self._send({"error": "not found"}, 404)
 
@@ -122,7 +127,7 @@ def test_doctor_reports_ok_with_fake_server(fake_ollama, tmp_path, capsys):
     cfg.dump(config_path)
     assert main(["doctor", "-c", str(config_path)]) == 0
     out = capsys.readouterr().out
-    assert "всё готово" in out and "qwen3.5:9b — есть" in out
+    assert "всё готово" in out and "qwen3.5:0.8b — есть" in out
 
 
 def test_connection_error_is_explained():
