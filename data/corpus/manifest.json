@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-25",
+  "stage": "Период 1, этап 2, шаг 1",
+  "status": "in_progress",
+  "partner_documentation": "requested_no_response",
+  "documents": [
+    {
+      "id": "linuxcnc-documentation-2.9",
+      "title": "LinuxCNC Documentation",
+      "path": "docs/LinuxCNC_Documentation_2.9.pdf",
+      "format": "pdf",
+      "language": "en",
+      "source_url": "https://linuxcnc.org/docs/2.9/pdf/LinuxCNC_Documentation.pdf",
+      "index_url": "https://linuxcnc.org/docs/2.9/html/",
+      "retrieved_at": "2026-10-25",
+      "document_version": "LinuxCNC V2.9.7-9-gd435482ad1, 22 Oct 2025",
+      "pdf_created_at": "2025-12-15T08:15:41-07:00",
+      "index_version_at_retrieval": "2.9.10",
+      "pages": 1347,
+      "bytes": 26376847,
+      "sha256": "996de93388aea13fe5aebd232d6641410255d83f2df6f74755431e8a3196f5f2",
+      "license": "GFDL-1.1-or-later",
+      "license_evidence": {
+        "pdf_page": 1334,
+        "copyright": "Copyright (c) 2000-2022 LinuxCNC.org",
+        "invariant_sections": false,
+        "front_cover_texts": false,
+        "back_cover_texts": false
+      },
+      "validation": {
+        "encrypted": false,
+        "pages_with_extractable_text": 1347,
+        "empty_text_pages": 0,
+        "extracted_characters_before_normalization": 2463787
+      }
+    }
+  ]
+}
