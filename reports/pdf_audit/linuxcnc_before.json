@@ -1,0 +1,132 @@
+{
+  "file": "docs\\LinuxCNC_Documentation_2.9.pdf",
+  "title": "LinuxCNC V2.9.7-9-gd435482ad1, 22 Oct",
+  "characters": 2216205,
+  "lines": 42932,
+  "replacement_characters": 0,
+  "suspicious_encoding_lines": 0,
+  "suspicious_encoding_examples": [],
+  "markdown_table_rows": 18,
+  "repeated_lines": [
+    {
+      "count": 291,
+      "line": "Note"
+    },
+    {
+      "count": 81,
+      "line": "}"
+    },
+    {
+      "count": 62,
+      "line": "..."
+    },
+    {
+      "count": 43,
+      "line": "Warning"
+    },
+    {
+      "count": 41,
+      "line": "Itisanerrorif:"
+    },
+    {
+      "count": 38,
+      "line": "[DISPLAY]"
+    },
+    {
+      "count": 28,
+      "line": "############################"
+    },
+    {
+      "count": 28,
+      "line": "#####################"
+    },
+    {
+      "count": 27,
+      "line": "###########################################"
+    },
+    {
+      "count": 26,
+      "line": "#!/usr/bin/env python3"
+    },
+    {
+      "count": 25,
+      "line": "Name Description"
+    },
+    {
+      "count": 22,
+      "line": "direction"
+    },
+    {
+      "count": 21,
+      "line": "Important"
+    },
+    {
+      "count": 21,
+      "line": "Thisdependsonthewidget/librariesused."
+    },
+    {
+      "count": 20,
+      "line": "try:"
+    },
+    {
+      "count": 20,
+      "line": "•"
+    },
+    {
+      "count": 19,
+      "line": "[RS274NGC]"
+    },
+    {
+      "count": 19,
+      "line": "<button>"
+    },
+    {
+      "count": 19,
+      "line": "</button>"
+    },
+    {
+      "count": 19,
+      "line": "."
+    },
+    {
+      "count": 19,
+      "line": "##########################################"
+    },
+    {
+      "count": 18,
+      "line": "Theabovecodeproducedthisexample:"
+    },
+    {
+      "count": 17,
+      "line": "else:"
+    },
+    {
+      "count": 17,
+      "line": "Thefollowingshowsanexampleofhowtosetthisproperty:"
+    },
+    {
+      "count": 16,
+      "line": "if state:"
+    },
+    {
+      "count": 16,
+      "line": "#gcodegraphics{"
+    },
+    {
+      "count": 14,
+      "line": "M2"
+    },
+    {
+      "count": 14,
+      "line": "Owner Type Dir Value Name"
+    },
+    {
+      "count": 14,
+      "line": "[HAL]"
+    },
+    {
+      "count": 14,
+      "line": "Pins Typeand"
+    }
+  ]
+}
