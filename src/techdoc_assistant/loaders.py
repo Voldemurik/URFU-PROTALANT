@@ -276,11 +276,63 @@ def _read_pdf(path: Path) -> str | None:
     try:
         from pypdf import PdfReader
     except ImportError:  # pragma: no cover - зависит от окружения
-        log.warning("Для чтения PDF установите пакет pypdf: pip install pypdf (%s)", path)
+        log.warning(
+            "Для чтения PDF установите зависимости: pip install -e \".[pdf]\" (%s)",
+            path,
+        )
         return None
-    reader = PdfReader(str(path))
-    pages = [(page.extract_text() or "") for page in reader.pages]
-    return "\n\n".join(pages)
+
+    try:
+        reader = PdfReader(str(path))
+        if reader.is_encrypted:
+            if not reader.decrypt(""):
+                log.warning("PDF защищён паролем и пропущен: %s", path)
+                return None
+    except Exception as exc:
+        log.warning("Не удалось открыть PDF %s: %s", path, exc)
+        return None
+
+    pages: list[str] = []
+    failed_pages = 0
+    empty_pages = 0
+
+    for page_number, page in enumerate(reader.pages, start=1):
+        try:
+            try:
+                # Layout сохраняет визуальное разделение колонок таблиц.
+                text = page.extract_text(extraction_mode="layout") or ""
+            except TypeError:
+                # Совместимость со старыми версиями pypdf.
+                text = page.extract_text() or ""
+        except Exception as exc:
+            failed_pages += 1
+            log.warning(
+                "Ошибка извлечения страницы %d из %s: %s",
+                page_number,
+                path,
+                exc,
+            )
+            pages.append("")
+            continue
+
+        if not text.strip():
+            empty_pages += 1
+            log.warning("Пустая по тексту страница %d: %s", page_number, path)
+        pages.append(text)
+
+    cleaned_pages = _clean_pdf_pages(pages)
+    nonempty_pages = [page for page in cleaned_pages if page.strip()]
+
+    log.info(
+        "PDF %s: страниц=%d, с текстом=%d, пустых=%d, ошибок=%d",
+        path,
+        len(pages),
+        len(nonempty_pages),
+        empty_pages,
+        failed_pages,
+    )
+
+    return "\n\n".join(nonempty_pages)
 
 
 def _read_docx(path: Path) -> str | None:
