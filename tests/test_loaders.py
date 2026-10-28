@@ -111,3 +111,66 @@ def test_empty_question_is_refused_without_llm(offline_pipeline, fake_llm):
     answer = offline_pipeline.ask("   ")
     assert answer.refused and answer.hits == []
     assert len(fake_llm.calls) == calls
+
+def test_pdf_repeated_headers_and_page_numbers_are_removed():
+    pages = [
+        "ACME Manual 1 / 3\n1. Safety\nDisconnect power before service.",
+        "ACME Manual 2 / 3\n2. Errors\nE12 means motor overheating.",
+        "ACME Manual 3 / 3\n3. Service\nWait 20 minutes before restart.",
+    ]
+
+    cleaned = _clean_pdf_pages(pages)
+
+    assert len(cleaned) == 3
+    assert all("ACME Manual" not in page for page in cleaned)
+    assert "Disconnect power before service." in cleaned[0]
+    assert "E12 means motor overheating." in cleaned[1]
+    assert "Wait 20 minutes before restart." in cleaned[2]
+
+def test_pdf_page_number_at_margin_is_removed():
+    pages = ["Safety instructions\nDisconnect power.\n42"]
+
+    cleaned = _clean_pdf_pages(pages)
+
+    assert "Disconnect power." in cleaned[0]
+    assert not cleaned[0].endswith("42")
+
+def test_pdf_hyphenated_word_is_joined():
+    pages = ["The display shows Posi-\ntion: Relative Actual."]
+
+    cleaned = _clean_pdf_pages(pages)
+
+    assert "Position: Relative Actual." in cleaned[0]
+
+def test_pdf_short_technical_hyphen_is_preserved():
+    pages = ["Use G-\ncode commands carefully."]
+
+    cleaned = _clean_pdf_pages(pages)
+
+    assert "G-code" in cleaned[0]
+
+def test_layout_table_is_converted_to_markdown():
+    text = (
+        "Code    Description       Action\n"
+        "E12     Overheating       Stop machine\n"
+        "E13     Low pressure      Check pump"
+    )
+
+    converted = _layout_tables_to_markdown(text)
+
+    assert "| Code | Description | Action |" in converted
+    assert "| --- | --- | --- |" in converted
+    assert "| E12 | Overheating | Stop machine |" in converted
+    assert "| E13 | Low pressure | Check pump |" in converted
+
+def test_regular_paragraph_is_not_converted_to_table():
+    text = "First ordinary line.\nSecond ordinary line."
+
+    assert _layout_tables_to_markdown(text) == text
+
+def test_clean_pdf_pages_preserves_document_order():
+    pages = ["First page content.", "Second page content."]
+
+    cleaned = _clean_pdf_pages(pages)
+
+    assert cleaned == pages
