@@ -167,6 +167,7 @@ def _clean_pdf_page(text: str) -> str:
     )
     text = _fix_mojibake(text)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
+    text = _TECHNICAL_HYPHEN_RE.sub(r"\1-\2", text)
     text = _DEHYPHENATE_RE.sub(r"\1\2", text)
     text = re.sub(r"[ \t]+\n", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
