@@ -10,7 +10,10 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
+from collections import Counter
 from collections.abc import Iterable, Iterator
+from math import ceil
 from pathlib import Path
 
 from techdoc_assistant.documents import Document
