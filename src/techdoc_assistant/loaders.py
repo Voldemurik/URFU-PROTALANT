@@ -143,6 +143,9 @@ _PAGE_NUMBER_RE = re.compile(
 _DEHYPHENATE_RE = re.compile(
     r"([A-Za-zА-Яа-яЁё]{2,})-\n([a-zа-яё]{2,})"
 )
+_TECHNICAL_HYPHEN_RE = re.compile(
+    r"\b([A-Za-zА-Яа-яЁё])-\n([a-zа-яё]{2,})"
+)
 
 def _fix_mojibake(text: str) -> str:
     """Исправлять текст только при наличии характерных признаков повреждения."""
