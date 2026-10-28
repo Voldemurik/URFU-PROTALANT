@@ -7,7 +7,12 @@ from techdoc_assistant.config import ChunkingConfig
 from techdoc_assistant.documents import Chunk, Document
 from techdoc_assistant.embeddings import HashingEmbedder
 from techdoc_assistant.llm import FakeLLM
-from techdoc_assistant.loaders import load_documents, read_text
+from techdoc_assistant.loaders import (
+    _clean_pdf_pages,
+    _layout_tables_to_markdown,
+    load_documents,
+    read_text,
+)
 from techdoc_assistant.prompts import is_refusal
 from techdoc_assistant.rag import IndexMismatchError, RagPipeline
 
