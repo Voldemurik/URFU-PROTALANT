@@ -88,7 +88,7 @@ git clone https://github.com/Voldemurik/URFU-PROTALANT.git
 cd URFU-PROTALANT
 python -m venv .venv
 .venv\Scripts\activate        # Linux/macOS: source .venv/bin/activate
-python -m pip install -e ".[all]"
+python -m pip install -e ".[all]"  # приложение + PDF/DOCX + FAISS + pytest/Ruff
 
 # 3. Проверка окружения
 techdoc doctor
@@ -102,10 +102,9 @@ techdoc chat                  # интерактивный режим
 techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen7b.md
 ```
 
-Для разработки дополнительно установите `pytest` и Ruff, затем запустите те же проверки, что и CI:
+Вариант `.[all]` уже включает `pytest` и Ruff. Для разработки запустите те же проверки, что и CI:
 
 ```bash
-python -m pip install -e ".[dev]"
 python -m pytest
 python -m ruff check .
 ```

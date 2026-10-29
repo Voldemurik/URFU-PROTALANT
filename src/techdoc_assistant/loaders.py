@@ -190,12 +190,13 @@ def _margin_indexes(lines: list[str]) -> set[int]:
     return set(nonempty[:3] + nonempty[-3:])
 
 def _table_cells(line: str) -> list[str] | None:
-    """Распознать строку layout-таблицы с двумя и более пробелами между колонками."""
+    """Распознать строку layout-таблицы, исключая строки содержания."""
     stripped = line.strip()
     if (
         not stripped
         or "|" in stripped
         or stripped.startswith(("• ", "- ", "* "))
+        or re.search(r"(?:\.\s*){3,}", stripped)
     ):
         return None
 
