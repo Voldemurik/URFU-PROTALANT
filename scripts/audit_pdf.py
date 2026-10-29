@@ -10,6 +10,7 @@ from pathlib import Path
 
 from techdoc_assistant.loaders import load_file
 
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("pdf", type=Path)

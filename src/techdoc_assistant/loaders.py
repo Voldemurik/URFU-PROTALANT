@@ -10,7 +10,10 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
+from collections import Counter
 from collections.abc import Iterable, Iterator
+from math import ceil
 from pathlib import Path
 
 from techdoc_assistant.documents import Document
@@ -127,16 +130,213 @@ def read_text(path: Path) -> str:
             best_text, best_score = candidate, score
     return best_text or data.decode("utf-8", errors="replace")
 
+# ------------------------------------------------------------------ PDF
+_MOJIBAKE_RE = re.compile(r"Ð.|Ñ.|Ã.|â€|Â.")
+
+_PAGE_NUMBER_RE = re.compile(
+    r"^(?:(?:page|стр(?:аница)?\.?)\s+)?"
+    r"(?:\d+\s*(?:/|\bof\b|\bиз\b)\s*\d+|\d+|[ivxlcdm]+)$",
+    re.IGNORECASE,
+)
+
+# «Posi-\ntion» → «Position». Короткие обозначения вроде «G-code» не трогаем.
+_DEHYPHENATE_RE = re.compile(
+    r"([A-Za-zА-Яа-яЁё]{2,})-\n([a-zа-яё]{2,})"
+)
+_TECHNICAL_HYPHEN_RE = re.compile(
+    r"\b([A-Za-zА-Яа-яЁё])-\n([a-zа-яё]{2,})"
+)
+
+def _fix_mojibake(text: str) -> str:
+    """Исправлять текст только при наличии характерных признаков повреждения."""
+    if not _MOJIBAKE_RE.search(text):
+        return text
+    try:
+        from ftfy import fix_text
+    except ImportError:  # pragma: no cover - зависит от окружения
+        return text
+    return fix_text(text)
+
+def _clean_pdf_page(text: str) -> str:
+    """Очистить одну страницу без удаления межколоночных пробелов."""
+    text = unicodedata.normalize("NFC", text)
+    text = text.replace("\u00a0", " ").replace("\u00ad", "")
+    text = "".join(
+        char for char in text
+        if char in "\n\t" or ord(char) >= 32
+    )
+    text = _fix_mojibake(text)
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    text = _TECHNICAL_HYPHEN_RE.sub(r"\1-\2", text)
+    text = _DEHYPHENATE_RE.sub(r"\1\2", text)
+    text = re.sub(r"[ \t]+\n", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+def _margin_key(line: str) -> str:
+    """Ключ строки колонтитула без меняющегося номера страницы."""
+    line = unicodedata.normalize("NFKC", line).casefold().strip()
+    line = re.sub(
+        r"(?:\d+\s*/\s*\d+|\d+|[ivxlcdm]+)\s*$",
+        "",
+        line,
+    )
+    line = re.sub(r"\d+", "<n>", line)
+    return re.sub(r"\s+", " ", line).strip()
+
+def _margin_indexes(lines: list[str]) -> set[int]:
+    """Первые и последние три непустые строки страницы."""
+    nonempty = [index for index, line in enumerate(lines) if line.strip()]
+    return set(nonempty[:3] + nonempty[-3:])
+
+def _table_cells(line: str) -> list[str] | None:
+    """Распознать строку layout-таблицы с двумя и более пробелами между колонками."""
+    stripped = line.strip()
+    if (
+        not stripped
+        or "|" in stripped
+        or stripped.startswith(("• ", "- ", "* "))
+    ):
+        return None
+
+    cells = [cell.strip() for cell in re.split(r"\s{2,}", stripped)]
+    if not 2 <= len(cells) <= 8 or any(not cell for cell in cells):
+        return None
+    return cells
+
+def _layout_tables_to_markdown(text: str) -> str:
+    """Преобразовать устойчивые последовательности колонок в Markdown-таблицы."""
+    output: list[str] = []
+    pending: list[tuple[str, list[str]]] = []
+
+    def flush() -> None:
+        if not pending:
+            return
+
+        widths = {len(cells) for _, cells in pending}
+        if len(pending) >= 2 and len(widths) == 1:
+            width = widths.pop()
+            for row_number, (_, cells) in enumerate(pending):
+                output.append("| " + " | ".join(cells) + " |")
+                if row_number == 0:
+                    output.append("| " + " | ".join(["---"] * width) + " |")
+        else:
+            output.extend(original.rstrip() for original, _ in pending)
+        pending.clear()
+
+    for line in text.splitlines():
+        cells = _table_cells(line)
+        if cells is None:
+            flush()
+            output.append(line.rstrip())
+        else:
+            pending.append((line, cells))
+    flush()
+
+    return "\n".join(output)
+
+def _clean_pdf_pages(pages: list[str]) -> list[str]:
+    """Удалить повторяющиеся колонтитулы и сохранить таблицы."""
+    pages = [_clean_pdf_page(page) for page in pages]
+    candidates: Counter[str] = Counter()
+
+    for page in pages:
+        lines = page.splitlines()
+        for index in _margin_indexes(lines):
+            line = lines[index].strip()
+            if not line or len(line) > 180 or "|" in line:
+                continue
+            key = _margin_key(line)
+            if key:
+                candidates[key] += 1
+
+    threshold = max(2, ceil(len(pages) * 0.20))
+    repeated = {
+        key for key, count in candidates.items()
+        if count >= threshold
+    }
+
+    cleaned_pages: list[str] = []
+    for page in pages:
+        lines = page.splitlines()
+        margins = _margin_indexes(lines)
+        kept: list[str] = []
+
+        for index, line in enumerate(lines):
+            stripped = line.strip()
+            if index in margins and stripped:
+                if _PAGE_NUMBER_RE.fullmatch(stripped):
+                    continue
+                if _margin_key(stripped) in repeated:
+                    continue
+            kept.append(line.rstrip())
+
+        cleaned = "\n".join(kept).strip()
+        cleaned_pages.append(_layout_tables_to_markdown(cleaned))
+
+    return cleaned_pages
 
 def _read_pdf(path: Path) -> str | None:
     try:
         from pypdf import PdfReader
     except ImportError:  # pragma: no cover - зависит от окружения
-        log.warning("Для чтения PDF установите пакет pypdf: pip install pypdf (%s)", path)
+        log.warning(
+            "Для чтения PDF установите зависимости: pip install -e \".[pdf]\" (%s)",
+            path,
+        )
         return None
-    reader = PdfReader(str(path))
-    pages = [(page.extract_text() or "") for page in reader.pages]
-    return "\n\n".join(pages)
+
+    try:
+        reader = PdfReader(str(path))
+        if reader.is_encrypted:
+            if not reader.decrypt(""):
+                log.warning("PDF защищён паролем и пропущен: %s", path)
+                return None
+    except Exception as exc:
+        log.warning("Не удалось открыть PDF %s: %s", path, exc)
+        return None
+
+    pages: list[str] = []
+    failed_pages = 0
+    empty_pages = 0
+
+    for page_number, page in enumerate(reader.pages, start=1):
+        try:
+            try:
+                # Layout сохраняет визуальное разделение колонок таблиц.
+                text = page.extract_text(extraction_mode="layout") or ""
+            except TypeError:
+                # Совместимость со старыми версиями pypdf.
+                text = page.extract_text() or ""
+        except Exception as exc:
+            failed_pages += 1
+            log.warning(
+                "Ошибка извлечения страницы %d из %s: %s",
+                page_number,
+                path,
+                exc,
+            )
+            pages.append("")
+            continue
+
+        if not text.strip():
+            empty_pages += 1
+            log.warning("Пустая по тексту страница %d: %s", page_number, path)
+        pages.append(text)
+
+    cleaned_pages = _clean_pdf_pages(pages)
+    nonempty_pages = [page for page in cleaned_pages if page.strip()]
+
+    log.info(
+        "PDF %s: страниц=%d, с текстом=%d, пустых=%d, ошибок=%d",
+        path,
+        len(pages),
+        len(nonempty_pages),
+        empty_pages,
+        failed_pages,
+    )
+
+    return "\n\n".join(nonempty_pages)
 
 
 def _read_docx(path: Path) -> str | None:

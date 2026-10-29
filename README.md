@@ -88,7 +88,7 @@ git clone https://github.com/Voldemurik/URFU-PROTALANT.git
 cd URFU-PROTALANT
 python -m venv .venv
 .venv\Scripts\activate        # Linux/macOS: source .venv/bin/activate
-pip install -e ".[faiss,pdf,docx]"
+python -m pip install -e ".[all]"
 
 # 3. Проверка окружения
 techdoc doctor
@@ -101,6 +101,18 @@ techdoc chat                  # интерактивный режим
 # 5. Оценка качества на учебном наборе
 techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen7b.md
 ```
+
+Для разработки дополнительно установите `pytest` и Ruff, затем запустите те же проверки, что и CI:
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest
+python -m ruff check .
+```
+
+Вызов через `python -m` гарантирует, что используется активированное окружение `.venv`. Команда `ruff check .` проверяет фактически существующие файлы проекта и не требует вручную перечислять каталоги вроде `scripts`.
+
+Если `git pull` сообщает, что неотслеживаемые локальные файлы будут перезаписаны, сначала сохраните их: переместите в резервную папку вне репозитория или добавьте в отдельный коммит, если они должны стать частью проекта. После этого повторите `git pull`. Не используйте `git clean -fd` без проверки: он безвозвратно удаляет неотслеживаемые файлы.
 
 > Модель по умолчанию — `qwen3.5:4b` — совпадает с базовой моделью контура дообучения
 > LoRA ([training/README.md](training/README.md), базовая модель `Qwen/Qwen3.5-9B`):
