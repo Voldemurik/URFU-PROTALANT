@@ -88,7 +88,7 @@ git clone https://github.com/Voldemurik/URFU-PROTALANT.git
 cd URFU-PROTALANT
 python -m venv .venv
 .venv\Scripts\activate        # Linux/macOS: source .venv/bin/activate
-python -m pip install -e ".[faiss,pdf,docx]"
+python -m pip install -e ".[all]"
 
 # 3. Проверка окружения
 techdoc doctor
