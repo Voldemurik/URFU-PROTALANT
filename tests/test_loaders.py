@@ -174,3 +174,21 @@ def test_clean_pdf_pages_preserves_document_order():
     cleaned = _clean_pdf_pages(pages)
 
     assert cleaned == pages
+
+
+def test_toc_lines_with_dot_leaders_are_not_converted_to_table():
+    text = (
+        "1.3.2.2 AMD-64 ImageusingGUItools   ........................   8\n"
+        "1.3.2.3 CommandLine-Linux           ........................   8"
+    )
+
+    assert _layout_tables_to_markdown(text) == text
+
+
+def test_toc_lines_with_spaced_dot_leaders_are_not_converted_to_table():
+    text = (
+        "1.1 About LinuxCNC          . . . . .   2\n"
+        "1.2 System Requirements     . . . . .   4"
+    )
+
+    assert _layout_tables_to_markdown(text) == text
