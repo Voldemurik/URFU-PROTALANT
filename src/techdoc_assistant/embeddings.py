@@ -9,13 +9,17 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
+import time
 from typing import Protocol
 
 import numpy as np
 
 from techdoc_assistant.config import EmbeddingConfig
-from techdoc_assistant.ollama_client import OllamaClient
+from techdoc_assistant.ollama_client import OllamaClient, OllamaError
+
+log = logging.getLogger(__name__)
 
 
 class Embedder(Protocol):
@@ -48,16 +52,71 @@ class OllamaEmbedder:
     def name(self) -> str:
         return f"ollama:{self.cfg.model}"
 
+    # Повторные попытки: EOF на /tokenize означает падение внутреннего
+    # runner'а Ollama, и следующий запрос обычно поднимает его заново.
+    _MAX_ATTEMPTS = 3
+    _BACKOFF_S = (2.0, 5.0, 10.0)
+
     def embed(self, texts: list[str]) -> np.ndarray:
         vectors: list[list[float]] = []
-        for start in range(0, len(texts), self.cfg.batch_size):
+        total = len(texts)
+        for start in range(0, total, self.cfg.batch_size):
             batch = texts[start : start + self.cfg.batch_size]
-            vectors.extend(self.client.embed(self.cfg.model, batch))
+            vectors.extend(self._embed_batch(batch))
+            done = start + len(batch)
+            # Часовой прогон без вывода выглядит как зависание — логируем прогресс.
+            if total > 100 and (done % 200 < self.cfg.batch_size or done == total):
+                log.info("Эмбеддинги: %d/%d фрагментов", done, total)
         if not vectors:
             return np.zeros((0, self.dim or 0), dtype=np.float32)
         matrix = l2_normalize(np.asarray(vectors, dtype=np.float32))
         self.dim = matrix.shape[1]
         return matrix
+
+    def _embed_batch(self, batch: list[str]) -> list[list[float]]:
+        """Эмбеддинги пакета с повторными попытками и дроблением пакета.
+
+        Сбойный пакет из нескольких текстов повторяем по одному тексту: так
+        временный сбой runner'а не обрывает часовую индексацию, а «ядовитый»
+        текст виден в сообщении об ошибке.
+        """
+        last_error: OllamaError | None = None
+        for attempt in range(self._MAX_ATTEMPTS):
+            try:
+                return self.client.embed(self.cfg.model, batch)
+            except OllamaError as exc:
+                last_error = exc
+                if attempt < self._MAX_ATTEMPTS - 1:
+                    pause = self._BACKOFF_S[attempt]
+                    log.warning(
+                        "Ollama не ответила на пакет из %d текстов "
+                        "(попытка %d/%d): %s. Повтор через %.0f с",
+                        len(batch),
+                        attempt + 1,
+                        self._MAX_ATTEMPTS,
+                        exc,
+                        pause,
+                    )
+                    time.sleep(pause)
+
+        if len(batch) > 1:
+            log.warning(
+                "Пакет из %d текстов не удался после %d попыток — "
+                "пробуем по одному тексту",
+                len(batch),
+                self._MAX_ATTEMPTS,
+            )
+            vectors: list[list[float]] = []
+            for text in batch:
+                vectors.extend(self._embed_batch([text]))
+            return vectors
+
+        preview = batch[0][:120].replace("\n", " ")
+        raise OllamaError(
+            "Не удалось получить эмбеддинг после "
+            f"{self._MAX_ATTEMPTS} попыток: {last_error}. "
+            f"Фрагмент ({len(batch[0])} символов): «{preview}…»"
+        ) from last_error
 
 
 _TOKEN_RE = re.compile(r"\w+", re.UNICODE)
