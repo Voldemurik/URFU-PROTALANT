@@ -2,3 +2,8 @@ __pycache__/
 *.egg-info/
 config.yaml
 /storage
+tmp/
+
+# Полные извлечённые тексты PDF-аудита — большие и воспроизводятся скриптом
+reports/pdf_audit/linuxcnc_before.txt
+reports/pdf_audit/linuxcnc_after.txt
