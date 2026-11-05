@@ -4,7 +4,7 @@
 
 ```bash
 techdoc ingest data/sample_docs --offline
-techdoc eval data/eval/sample_qa.jsonl --offline --report-md reports/baseline_offline_extractive.md
+techdoc eval data/eval/sample_qa.jsonl --offline --report-md reports/test_baseline/baseline_offline_extractive.md
 ```
 
 Дата: 2026-08-28. Конфигурация — значения по умолчанию (top_k=5, chunk_size=900, hybrid=true).

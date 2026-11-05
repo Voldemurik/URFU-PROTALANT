@@ -20,7 +20,7 @@ python scripts\audit_pdf.py docs\LinuxCNC_Documentation_2.9.pdf --name linuxcnc_
 Сформированы файлы:
 
 - [linuxcnc_after.json](linuxcnc_after.json);
-- [linuxcnc_after.txt](linuxcnc_after.txt).
+- `linuxcnc_after.txt` — создаётся локально и не добавляется в Git.
 
 Характеристики итогового текста:
 
