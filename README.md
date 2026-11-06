@@ -193,7 +193,7 @@ URFU-PROTALANT/
 ├── docs/                      # архитектура, оценка, дорожная карта, обзор аналогов
 ├── reports/                   # отчёты techdoc eval
 ├── tests/                     # тесты (без Ollama и GPU)
-└── .github/workflows/ci.yml   # ruff + pytest + smoke-тест CLI
+└── .github/workflows/ci.yml   # ruff + pytest на Python 3.10–3.12
 ```
 ## Цели и ожидания
 
@@ -223,7 +223,7 @@ URFU-PROTALANT/
 | Векторный поиск | FAISS (`IndexFlatIP`) или NumPy | точный поиск, нулевая инфраструктура |
 | Лексический поиск | BM25 (свой, ~100 строк) | прозрачность; точные коды и артикулы |
 | Дообучение | `peft` + `transformers` (LoRA/QLoRA) | адаптер в десятки МБ, обучение на одной GPU |
-| Качество кода | `ruff`, `pytest`, GitHub Actions | проверки при каждом push и pull request |
+| Качество кода | `ruff`, `pytest`, GitHub Actions | проверки при push в `main` и при каждом pull request |
 
 ## Документация
 
