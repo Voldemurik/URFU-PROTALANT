@@ -5,7 +5,7 @@
 <!-- Связанный issue (closes #…) или этап дорожной карты -->
 
 ## Чек-лист
-- [ ] `ruff check src tests training` — без ошибок
+- [ ] `ruff check .` — без ошибок
 - [ ] `pytest` — все тесты зелёные
 - [ ] Новое поведение покрыто тестом
 - [ ] CHANGELOG.md дополнен (раздел Unreleased)
