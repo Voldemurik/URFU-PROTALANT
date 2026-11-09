@@ -1,0 +1,1221 @@
+{
+  "started_at": 1794215685.0270846,
+  "config": {
+    "ollama": {
+      "host": "http://localhost:11434",
+      "timeout": 600.0
+    },
+    "embeddings": {
+      "model": "qwen3-embedding:0.6b",
+      "batch_size": 16
+    },
+    "llm": {
+      "model": "qwen3.5:0.8b",
+      "temperature": 0.1,
+      "num_ctx": 8192,
+      "think": false,
+      "max_tokens": 1024
+    },
+    "chunking": {
+      "chunk_size": 900,
+      "chunk_overlap": 150,
+      "min_chunk_size": 80
+    },
+    "retrieval": {
+      "top_k": 5,
+      "candidates": 20,
+      "hybrid": true,
+      "rrf_k": 60,
+      "min_score": 0.0
+    },
+    "index_dir": "storage\\index-stage2-step3-offline"
+  },
+  "summary": {
+    "samples": 42.0,
+    "retrieval/recall@k": 1.0,
+    "retrieval/hit_rate": 1.0,
+    "retrieval/mrr": 1.0,
+    "answer/token_f1": 0.2653958004070533,
+    "answer/must_include": 0.6925925925925926,
+    "citations/precision": 1.0,
+    "citations/recall": 1.0,
+    "citations/answered_with_citation": 1.0,
+    "hallucination/false_refusal_rate": 0.0,
+    "hallucination/trap_refusal_rate": 0.0,
+    "latency/mean_s": 0.001975357144450148
+  },
+  "results": [
+    {
+      "sample_id": "lc01",
+      "question": "Which real-time kernel extensions can LinuxCNC use to operate machinery?",
+      "answer": "This section describes the recommended way to download and make a fresh install of LinuxCNC. There are also Alternate Install Methods for the adventurous. If you have an existing install that you want to upgrade, go to the Updating LinuxCNC section instead.\n\n> **Note**\n>\n> To operate machinery LinuxCNC requires a special kernel with real-time extensions. There are three possibilities here: preempt-rt, RTAI or Xenomai. In addition there are two versions of LinuxCNC which work with these kernels. See the table below for details. However for code testing and simulation it is possible to run the… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.28571428571428575,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.010999900056049228,
+      "tags": [
+        "1.3",
+        "kernel",
+        "installation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc02",
+      "question": "Can LinuxCNC be tested on a stock kernel, and which application is used?",
+      "answer": "This section describes the recommended way to download and make a fresh install of LinuxCNC. There are also Alternate Install Methods for the adventurous. If you have an existing install that you want to upgrade, go to the Updating LinuxCNC section instead.\n\n> **Note**\n>\n> To operate machinery LinuxCNC requires a special kernel with real-time extensions. There are three possibilities here: preempt-rt, RTAI or Xenomai. In addition there are two versions of LinuxCNC which work with these kernels. See the table below for details. However for code testing and simulation it is possible to run the… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.17582417582417584,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0022199000231921673,
+      "tags": [
+        "1.3",
+        "simulation",
+        "kernel"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc03",
+      "question": "What is the outlined four-step process for a fresh LinuxCNC installation?",
+      "answer": "See the table below for details. However for code testing and simulation it is possible to run the `linuxcnc-uspace` application on a stock kernel.\n\nFresh installs of LinuxCNC are most easily created using the Live/Install Image. This is a hybrid ISO filesystem image that can be written to a USB storage device or a DVD and used to boot a computer. At boot time you will be given a choice of booting the “Live” system (to run LinuxCNC without making any permanent changes to your computer) or booting the Installer (to install LinuxCNC and its operating system onto your computer’s hard… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3238095238095238,
+      "must_include_coverage": 0.75,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017379999626427889,
+      "tags": [
+        "1.3",
+        "installation",
+        "process"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc04",
+      "question": "Where is LinuxCNC software presented for normal download, and which image do most PC users need?",
+      "answer": "Software for LinuxCNC to download is presented on the project’s [Downloads page](https://linuxcnc.org/downloads/). Most users will aim for the disk image for Intel/AMD PCs, the URL will resemble <https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso>.\n\nFor the Raspberry Pi, multiple images are provided to address differences between the RPi4 and RPi5.\n\n> **Note**\n>\n> Do not use the regular Raspbian distribution for LinuxCNC that may have shipped with your RPi starter kit — that will not have the real-time kernel and you cannot migrate from Raspbian to Debian’s kernel image. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3893805309734513,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.003755199955776334,
+      "tags": [
+        "1.3.1.1",
+        "download"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc05",
+      "question": "Why are multiple LinuxCNC images provided for Raspberry Pi?",
+      "answer": "Software for LinuxCNC to download is presented on the project’s [Downloads page](https://linuxcnc.org/downloads/). Most users will aim for the disk image for Intel/AMD PCs, the URL will resemble <https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso>.\n\nFor the Raspberry Pi, multiple images are provided to address differences between the RPi4 and RPi5.\n\n> **Note**\n>\n> Do not use the regular Raspbian distribution for LinuxCNC that may have shipped with your RPi starter kit — that will not have the real-time kernel and you cannot migrate from Raspbian to Debian’s kernel image. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.16842105263157897,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0020292000845074654,
+      "tags": [
+        "1.3.1.1",
+        "Raspberry Pi",
+        "download"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc06",
+      "question": "Why should the regular Raspbian distribution from a Raspberry Pi starter kit not be used for LinuxCNC?",
+      "answer": "Software for LinuxCNC to download is presented on the project’s [Downloads page](https://linuxcnc.org/downloads/). Most users will aim for the disk image for Intel/AMD PCs, the URL will resemble <https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso>.\n\nFor the Raspberry Pi, multiple images are provided to address differences between the RPi4 and RPi5.\n\n> **Note**\n>\n> Do not use the regular Raspbian distribution for LinuxCNC that may have shipped with your RPi starter kit — that will not have the real-time kernel and you cannot migrate from Raspbian to Debian’s kernel image. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.25,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0023209000937640667,
+      "tags": [
+        "1.3.1.1",
+        "Raspberry Pi",
+        "kernel"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc07",
+      "question": "When is zsync useful for downloading the LinuxCNC image?",
+      "answer": "`zsync` is a download application that efficiently resumes interrupted downloads and efficiently transfers large files with small modifications (if you have an older local copy). Use `zsync` if you have trouble downloading the image using the Normal Download method.\n\n**zsync in Linux**\n\n1. Install `zsync` using Synaptic or by running the following in a terminal:\n\n```bash\n   sudo apt-get install zsync\n   ```\n\n2. Then run this command to download the ISO to your computer:\n\n```bash\n   zsync https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso\n   ```\n\n**zsync in Windows**\n\nThere is a… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3564356435643565,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.001897500129416585,
+      "tags": [
+        "1.3.1.2",
+        "zsync",
+        "download"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc08",
+      "question": "How can zsync be installed on Linux from a terminal?",
+      "answer": "`zsync` is a download application that efficiently resumes interrupted downloads and efficiently transfers large files with small modifications (if you have an older local copy). Use `zsync` if you have trouble downloading the image using the Normal Download method.\n\n**zsync in Linux**\n\n1. Install `zsync` using Synaptic or by running the following in a terminal:\n\n```bash\n   sudo apt-get install zsync\n   ```\n\n2. Then run this command to download the ISO to your computer:\n\n```bash\n   zsync https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso\n   ```\n\n**zsync in Windows**\n\nThere is a… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.1839080459770115,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0014823998790234327,
+      "tags": [
+        "1.3.1.2",
+        "zsync",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc09",
+      "question": "Is checksum verification necessary after zsync, and which commands verify a normally downloaded image?",
+      "answer": "`zsync` is a download application that efficiently resumes interrupted downloads and efficiently transfers large files with small modifications (if you have an older local copy). Use `zsync` if you have trouble downloading the image using the Normal Download method.\n\n**zsync in Linux**\n\n1. Install `zsync` using Synaptic or by running the following in a terminal:\n\n```bash\n   sudo apt-get install zsync\n   ```\n\n2. Then run this command to download the ISO to your computer:\n\n```bash\n   zsync https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso\n   ```\n\n**zsync in Windows**\n\nThere is a… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.16494845360824742,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.002024899935349822,
+      "tags": [
+        "1.3.1.3",
+        "checksum",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc10",
+      "question": "What SHA-256 checksum is listed for the amd64 LinuxCNC 2.9.4 image?",
+      "answer": "(This step is unnecessary if you used `zsync`.)\n\n1. After downloading, verify the checksum of the image to ensure integrity.\n\n```bash\n   md5sum linuxcnc-2.9.4-amd64.iso\n   ```\n\nor\n\n```bash\n   sha256sum linuxcnc-2.9.4-amd64.iso\n   ```\n\n2. Then compare to these checksums:\n\n**amd64 (PC)**\n\n```text\n   md5sum: 1815aceaac0e7861747aa34d61846e79\n   sha256sum: 08b3f59233e47c91cf1c9a85c41df48542c97b134efefa7446d3060c9a3e644b\n   ```\n\n**arm64 (Pi)**\n\n```text\n   md5sum: 4547e8a72433efb033f0a5cf166a5cd2\n   sha256sum: ff3ba9b8dfb93baf1e2232746655f8521a606bc0fab91bffc04ba74cc3be6bf0\n   ```\n\n**Verify md5sum… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.09999999999999999,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0029770999681204557,
+      "tags": [
+        "1.3.1.3",
+        "checksum",
+        "amd64"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc11",
+      "question": "What MD5 checksum is listed for the arm64 Raspberry Pi image?",
+      "answer": "The Raspbery Pi image is a completes SD card image and should be written to an SD card with the [Raspberry Pi Imager App](https://www.raspberrypi.com/software/). [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.0,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0012688001152127981,
+      "tags": [
+        "1.3.1.3",
+        "checksum",
+        "arm64"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc12",
+      "question": "Which bootable media can the hybrid LinuxCNC ISO be written to, and why not use a CD?",
+      "answer": "The LinuxCNC Live/Install ISO Image is a hybrid ISO image which can be written directly to a USB storage device (flash drive) or a DVD and used to boot a computer. The image is too large to fit on a CD. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.6666666666666666,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017226999625563622,
+      "tags": [
+        "1.3.2",
+        "bootable media"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc13",
+      "question": "How should the Raspberry Pi LinuxCNC image be written?",
+      "answer": "The Raspbery Pi image is a completes SD card image and should be written to an SD card with the [Raspberry Pi Imager App](https://www.raspberrypi.com/software/). [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.6842105263157894,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0011338000185787678,
+      "tags": [
+        "1.3.2.1",
+        "Raspberry Pi"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc14",
+      "question": "Which GUI tools are recommended for writing the AMD-64 image, including a fallback for boot failures?",
+      "answer": "```\n\n5. Note that this may take a long time to complete and there will be no feedback during the process.\n\n**Writing the image to a DVD in Linux**\n\n1. Insert a blank DVD into your burner. A CD/DVD Creator or Choose Disc Type window will pop up. Close this, as we will not be using it.\n2. Browse to the downloaded image in the file browser.\n3. Right-click on the ISO image file and choose Write to Disc.\n4. Select the write speed. It is recommended that you write at the lowest possible speed.\n5. Start the burning process.\n6. If a “choose a file name for the disc image” window pops up, just pick… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.06956521739130435,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017319000326097012,
+      "tags": [
+        "1.3.2.2",
+        "USB",
+        "GUI"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc15",
+      "question": "How can the USB device file be determined before using dd on Linux?",
+      "answer": "1. Connect a USB storage device (for example a flash drive or thumb drive type device).\n2. Determine the device file corresponding to the USB flash drive. This information can be found in the output of `dmesg` after connecting the device. `/proc/partitions` may also be helpful.\n3. Use the `dd` command to write the image to your USB storage device. For example, if your storage device showed up as `/dev/sde`, then use this command:\n\n```bash\n   dd if=linuxcnc_2.9.4-amd64.hybrid.iso of=/dev/sde\n   ``` [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.32967032967032966,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0014182999730110168,
+      "tags": [
+        "1.3.2.3",
+        "Linux",
+        "dd"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc16",
+      "question": "What dd command is shown for writing the LinuxCNC image to /dev/sde on Linux?",
+      "answer": "1. Connect a USB storage device (for example a flash drive or thumb drive type device).\n2. Determine the device file corresponding to the USB flash drive. This information can be found in the output of `dmesg` after connecting the device. `/proc/partitions` may also be helpful.\n3. Use the `dd` command to write the image to your USB storage device. For example, if your storage device showed up as `/dev/sde`, then use this command:\n\n```bash\n   dd if=linuxcnc_2.9.4-amd64.hybrid.iso of=/dev/sde\n   ``` [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.2758620689655173,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017222000751644373,
+      "tags": [
+        "1.3.2.3",
+        "Linux",
+        "dd",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc17",
+      "question": "How are disks listed and the USB disk unmounted on macOS before writing the image?",
+      "answer": "1. Open a terminal and type:\n\n```bash\n   diskutil list\n   ```\n\n2. Insert the USB and note the name of the new disk that appears, e.g. `/dev/disk5`.\n3. Unmount the USB. The number found above should be substitued in place of the N:\n\n```bash\n   diskutil unmountDisk /dev/diskN\n   ```\n\n4. Transfer the data with `dd`, as for Linux above. Note that the disk name has an added “r” at the begining:\n\n```bash\n   sudo dd if=linuxcnc_2.9.4-amd64.hybrid.iso of=/dev/rdiskN bs=1m\n   ```\n\n5. Note that this may take a long time to complete and there will be no feedback during the process.\n\n**Writing the image… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.20560747663551399,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0010609000455588102,
+      "tags": [
+        "1.3.2.4",
+        "macOS",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc18",
+      "question": "What macOS dd command writes the image, including the special disk prefix and block size?",
+      "answer": "1. Open a terminal and type:\n\n```bash\n   diskutil list\n   ```\n\n2. Insert the USB and note the name of the new disk that appears, e.g. `/dev/disk5`.\n3. Unmount the USB. The number found above should be substitued in place of the N:\n\n```bash\n   diskutil unmountDisk /dev/diskN\n   ```\n\n4. Transfer the data with `dd`, as for Linux above. Note that the disk name has an added “r” at the begining:\n\n```bash\n   sudo dd if=linuxcnc_2.9.4-amd64.hybrid.iso of=/dev/rdiskN bs=1m\n   ```\n\n5. Note that this may take a long time to complete and there will be no feedback during the process.\n\n**Writing the image… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.35398230088495575,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0010133001487702131,
+      "tags": [
+        "1.3.2.4",
+        "macOS",
+        "dd",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc19",
+      "question": "What write speed is recommended when burning the LinuxCNC image to DVD in Linux?",
+      "answer": "```\n\n5. Note that this may take a long time to complete and there will be no feedback during the process.\n\n**Writing the image to a DVD in Linux**\n\n1. Insert a blank DVD into your burner. A CD/DVD Creator or Choose Disc Type window will pop up. Close this, as we will not be using it.\n2. Browse to the downloaded image in the file browser.\n3. Right-click on the ISO image file and choose Write to Disc.\n4. Select the write speed. It is recommended that you write at the lowest possible speed.\n5. Start the burning process.\n6. If a “choose a file name for the disc image” window pops up, just pick… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.0970873786407767,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.003950799815356731,
+      "tags": [
+        "1.3.2",
+        "DVD",
+        "Linux"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc20",
+      "question": "How is the LinuxCNC ISO burned to DVD in Windows with InfraRecorder?",
+      "answer": "Start the burning process.\n6. If a “choose a file name for the disc image” window pops up, just pick OK.\n\n**Writing the image to a DVD in Windows**\n\n1. Download and install InfraRecorder, a free and open source image burning program: <http://infrarecorder.org/>.\n2. Insert a blank CD in the drive and select Do nothing or Cancel if an auto-run dialog pops up.\n3. Open InfraRecorder, and select the Actions menu, then Burn image.\n\n**Writing the image to a DVD in Mac OSX**\n\n1. Download the `.iso` file.\n2. Right-click on the file in the Finder window and select “Burn to disc”. (The option to burn to… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.32380952380952377,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0024437999818474054,
+      "tags": [
+        "1.3.2",
+        "DVD",
+        "Windows"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc21",
+      "question": "How is the LinuxCNC ISO burned to disc on macOS?",
+      "answer": "The LinuxCNC Live/Install ISO Image is a hybrid ISO image which can be written directly to a USB storage device (flash drive) or a DVD and used to boot a computer. The image is too large to fit on a CD. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.20833333333333331,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0016626999713480473,
+      "tags": [
+        "1.3.2",
+        "DVD",
+        "macOS"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc22",
+      "question": "What are the limitations of a LinuxCNC Live session, and what test should still be run?",
+      "answer": "See the table below for details. However for code testing and simulation it is possible to run the `linuxcnc-uspace` application on a stock kernel.\n\nFresh installs of LinuxCNC are most easily created using the Live/Install Image. This is a hybrid ISO filesystem image that can be written to a USB storage device or a DVD and used to boot a computer. At boot time you will be given a choice of booting the “Live” system (to run LinuxCNC without making any permanent changes to your computer) or booting the Installer (to install LinuxCNC and its operating system onto your computer’s hard… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.15686274509803924,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0021637999452650547,
+      "tags": [
+        "1.3.3",
+        "Live",
+        "latency"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc23",
+      "question": "Which real-time kernel is supplied with the Live Image, and what experimental alternative may improve latency?",
+      "answer": "makes sense to pick a “sim” configuration. Some of the sample configurations include onscreen 3D simulated machines, look for “Vismach” to see these.\n\nTo see if your computer is suitable for software step pulse generation run the Latency Test as shown here.\n\nAt the time of writing the Live Image is only available with the preempt-rt kernel and a matching LinuxCNC. On some hardware this might not offer good enough latency. There is an experimental version available using the RTAI realtime kernel which will often give better latency. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3829787234042553,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0015185000374913216,
+      "tags": [
+        "1.3.3",
+        "Live",
+        "kernel",
+        "latency"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc24",
+      "question": "Which boot option starts a graphical LinuxCNC installation from the Live CD?",
+      "answer": "With the USB storage device plugged in or the DVD in the DVD drive, shut down the computer then turn the computer back on. This will boot the computer from the Live/Install Image and choose the Live boot option.\n\n> **Note**\n>\n> If the system does not boot from the DVD or USB stick, it may be necessary to change the boot order in the PC BIOS.\n\nOnce the computer has booted up you can try out LinuxCNC without installing it. You can not create custom configurations or modify most system settings in a Live session, but you can (and should) run the latency test.\n\nTo try out LinuxCNC: from the… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.02127659574468085,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0009419000707566738,
+      "tags": [
+        "1.3.4",
+        "installation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc25",
+      "question": "What update precaution applies to a normal LinuxCNC installation?",
+      "answer": "After installation, LinuxCNC starts just like any other Linux program: run it from the terminal by issuing the command `linuxcnc`, or select it in the Applications → CNC menu. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.041666666666666664,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0008192998357117176,
+      "tags": [
+        "1.3.5",
+        "updates",
+        "warning"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc26",
+      "question": "What can be done if the Live CD installer cannot recognize the hard drive?",
+      "answer": "In rare cases you might have to reset the BIOS to default settings if during the Live CD install it cannot recognize the hard drive during the boot up. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.4324324324324324,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0035050997976213694,
+      "tags": [
+        "1.3.6",
+        "BIOS",
+        "troubleshooting"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc27",
+      "question": "Which package and kernel are listed for Debian Bookworm on amd64 and arm64, and what is their typical use?",
+      "answer": "from Debian but this will install an old pre-release version, and is not recommended at this time.\n\n1. Install the Preempt-RT kernel and modules:\n\n```bash\n   sudo apt-get install linux-image-rt-amd64\n   ```\n\n2. Reboot and select the Linux `6.1.0-10-rt-amd64` kernel. The exact kernel version might be different, look for the `-rt` suffix. This might be hidden in the “Advanced options for Debian Bookworm” submenu in Grub. When you log in, verify that `PREEMPT RT` is reported by the following command:\n\n```bash\n   uname -v\n   ``` [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.21782178217821782,
+      "must_include_coverage": 0.6,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017654001712799072,
+      "tags": [
+        "1.3.7",
+        "Debian",
+        "table"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc28",
+      "question": "Is LinuxCNC 2.9 supported on Debian 9 or older?",
+      "answer": "| Distribution | Architecture | Kernel | Package name | Typical use |\n| --- | --- | --- | --- | --- |\n| Debian Bookworm | amd64 & arm64 | preempt-rt | linuxcnc-uspace | machine control & simulation |\n| Debian Bookworm | amd64 | RTAI | linuxcnc | machine control |\n| Debian Bullseye | amd64 | preempt-rt | linuxcnc-uspace | machine control & simulation |\n| Debian Buster | amd64 & arm64 | preempt-rt | linuxcnc-uspace | machine control & simulation |\n| Debian Buster | amd64 | RTAI | linuxcnc | machine control |\n| Any | Any | Stock | linuxcnc-uspace | simulation ONLY |\n\n> **Note**\n>\n> LinuxCNC v2.9… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.07792207792207792,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0012980999890714884,
+      "tags": [
+        "1.3.7",
+        "Debian",
+        "compatibility"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc29",
+      "question": "Why should no root password be entered during the Debian Bookworm installation described for LinuxCNC?",
+      "answer": "1. Install Debian Bookworm (Debian 12), amd64 version. You can download the installer here: <https://www.debian.org/distrib/>.\n2. After burning the ISO and booting up, if you don’t want Gnome desktop select Advanced Options > Alternative desktop environments and pick the one you like. Then select Install or Graphical Install.\n\n> **Warning**\n   >\n   > Do not enter a root password. If you do, sudo is disabled and you won’t be able to complete the following steps.\n\n3. Run the following in a terminal to bring the machine up to date with the latest packages:\n\n```bash\n   sudo apt-get update\n   sudo… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.10101010101010101,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.001518900040537119,
+      "tags": [
+        "1.3.7.1",
+        "Debian",
+        "warning"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc30",
+      "question": "How is the Preempt-RT kernel installed and verified on Debian Bookworm amd64?",
+      "answer": "from Debian but this will install an old pre-release version, and is not recommended at this time.\n\n1. Install the Preempt-RT kernel and modules:\n\n```bash\n   sudo apt-get install linux-image-rt-amd64\n   ```\n\n2. Reboot and select the Linux `6.1.0-10-rt-amd64` kernel. The exact kernel version might be different, look for the `-rt` suffix. This might be hidden in the “Advanced options for Debian Bookworm” submenu in Grub. When you log in, verify that `PREEMPT RT` is reported by the following command:\n\n```bash\n   uname -v\n   ``` [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.34951456310679613,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0014593000523746014,
+      "tags": [
+        "1.3.7.1",
+        "Preempt-RT",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc31",
+      "question": "Which package changes and kernel are specified for the experimental RTAI installation on Debian Bookworm?",
+      "answer": "Any | Any | Stock | linuxcnc-uspace | simulation ONLY |\n\n> **Note**\n>\n> LinuxCNC v2.9 is not supported on Debian 9 or older.\n\n**Preempt-RT kernels**\n\nThe Preempt-RT kernels are available for Debian from the regular debian.org archive. The package is called `linux-image-rt-*`. Simply install the package in the same way as any other package from the Synaptic Package Manager or with `apt-get` at the command line.\n\n**RTAI Kernels**\n\nThe RTAI kernels are available for download from the linuxcnc.org Debian archive. The apt sources are:\n\n- Debian Bookworm: `deb http://linuxcnc.org bookworm base`\n-… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.163265306122449,
+      "must_include_coverage": 0.3333333333333333,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.001687200041487813,
+      "tags": [
+        "1.3.7.2",
+        "RTAI",
+        "command"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc32",
+      "question": "What does the documentation advise about installing LinuxCNC on Raspbian 12?",
+      "answer": "Don’t do that. The latencies are too bad with the default kernel and the PREEMPT_RT (the RT is important) kernel of Debian does not boot on the Pi (as of 1/2024). Please refer to the images provided online. You can create them yourself following the [scripts provided online](https://github.com/rodw-au/rpi-img-builder-lcnc). [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.4415584415584416,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0009377999231219292,
+      "tags": [
+        "1.3.7.3",
+        "Raspbian",
+        "warning"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc33",
+      "question": "How can LinuxCNC be invoked after installation?",
+      "answer": "After installation, LinuxCNC starts just like any other Linux program: run it from the terminal by issuing the command `linuxcnc`, or select it in the Applications → CNC menu. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.5714285714285715,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0007164000999182463,
+      "tags": [
+        "1.4.1",
+        "startup"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc34",
+      "question": "Where are user configurations stored, and what happens to a selected sample configuration?",
+      "answer": "on the next invocation of the Configuration Selector.\n\nThe Configuration Selector offers a selection of configurations organized as follows:\n\n- **My Configurations** — user configurations located in `linuxcnc/configs` in your home directory.\n- **Sample Configurations** — sample configurations, when selected, are copied to `linuxcnc/configs`. Once a sample configuration was copied to your local directory, the launcher will offer it as My Configurations. The names under which these local configurations are presented correspond to the names of the directories within the `configs/` directory:\n  -… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.4,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.002851399825885892,
+      "tags": [
+        "1.4.2",
+        "Configuration Selector"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc35",
+      "question": "What hardware and real-time support are required by Sample Configurations/sim?",
+      "answer": "All configurations listed under Sample Configurations/sim are intended to run on any computer. No specific hardware is required and real-time support is not needed.\n\nThese configurations are useful for studying individual capabilities or options. The `sim` configurations are organized according to the graphical user interface used in the demonstration. The directory for `axis` contains the most choices and subdirectories because it is the most tested GUI. The capabilities demonstrated with any specific GUI may be available in other GUIs as well. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.2891566265060241,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.002469700062647462,
+      "tags": [
+        "1.4.4",
+        "simulation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc36",
+      "question": "Which files typically accompany a copied configuration, and how does hallib affect local HAL modifications?",
+      "answer": "in a text file named after a specific configuration (`inifilename.txt`). That latter two files are displayed when using the Configuration Selector.\n\nThe supplied sample configurations may specify the parameter `HALFILE` (`filename.hal`) in the configuration INI file that are not present in the copied directory because they are found in the system HAL file library. These files can be copied to the user configuration directory and altered as required by the user for modification or test. Since the user configuration directory is searched first when finding HAL files, local modifications will… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.2941176470588235,
+      "must_include_coverage": 0.25,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0014734999276697636,
+      "tags": [
+        "1.4.5",
+        "HAL",
+        "configuration resources"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "lc37",
+      "question": "What is the download URL for the official native LinuxCNC installer for Windows 11?",
+      "answer": "Software for LinuxCNC to download is presented on the project’s [Downloads page](https://linuxcnc.org/downloads/). Most users will aim for the disk image for Intel/AMD PCs, the URL will resemble <https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso>.\n\nFor the Raspberry Pi, multiple images are provided to address differences between the RPi4 and RPi5.\n\n> **Note**\n>\n> Do not use the regular Raspbian distribution for LinuxCNC that may have shipped with your RPi starter kit — that will not have the real-time kernel and you cannot migrate from Raspbian to Debian’s kernel image. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.0909090909090909,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0012163999490439892,
+      "tags": [
+        "trap",
+        "Windows",
+        "unsupported"
+      ],
+      "answerable": false,
+      "judge": null
+    },
+    {
+      "sample_id": "lc38",
+      "question": "What maximum USB flash drive capacity is allowed for the LinuxCNC Live/Install image?",
+      "answer": "See the table below for details. However for code testing and simulation it is possible to run the `linuxcnc-uspace` application on a stock kernel.\n\nFresh installs of LinuxCNC are most easily created using the Live/Install Image. This is a hybrid ISO filesystem image that can be written to a USB storage device or a DVD and used to boot a computer. At boot time you will be given a choice of booting the “Live” system (to run LinuxCNC without making any permanent changes to your computer) or booting the Installer (to install LinuxCNC and its operating system onto your computer’s hard… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.021505376344086023,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0014271000400185585,
+      "tags": [
+        "trap",
+        "USB",
+        "specification"
+      ],
+      "answerable": false,
+      "judge": null
+    },
+    {
+      "sample_id": "lc39",
+      "question": "What is the default administrator password for the LinuxCNC Configuration Selector?",
+      "answer": "When starting LinuxCNC (from the CNC menu or from the command line without specifying an INI file) the Configuration Selector dialog starts.\n\nThe Configuration Selector dialog allows the user to pick one of their existing configurations (My Configurations) or select a new one (from the Sample Configurations) to be copied to their home directory. Copied configurations will appear under My Configurations on the next invocation of the Configuration Selector.\n\nThe Configuration Selector offers a selection of configurations organized as follows: [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.05405405405405405,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0014141001738607883,
+      "tags": [
+        "trap",
+        "password",
+        "Configuration Selector"
+      ],
+      "answerable": false,
+      "judge": null
+    },
+    {
+      "sample_id": "lc40",
+      "question": "Where can the official native macOS build of LinuxCNC be downloaded?",
+      "answer": "With the USB storage device plugged in or the DVD in the DVD drive, shut down the computer then turn the computer back on. This will boot the computer from the Live/Install Image and choose the Live boot option.\n\n> **Note**\n>\n> If the system does not boot from the DVD or USB stick, it may be necessary to change the boot order in the PC BIOS.\n\nOnce the computer has booted up you can try out LinuxCNC without installing it. You can not create custom configurations or modify most system settings in a Live session, but you can (and should) run the latency test.\n\nTo try out LinuxCNC: from the… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.03636363636363636,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0010602998081594706,
+      "tags": [
+        "trap",
+        "macOS",
+        "unsupported"
+      ],
+      "answerable": false,
+      "judge": null
+    },
+    {
+      "sample_id": "lc41",
+      "question": "What exact latency value in microseconds guarantees that any computer is suitable for software step pulse generation?",
+      "answer": "makes sense to pick a “sim” configuration. Some of the sample configurations include onscreen 3D simulated machines, look for “Vismach” to see these.\n\nTo see if your computer is suitable for software step pulse generation run the Latency Test as shown here.\n\nAt the time of writing the Live Image is only available with the preempt-rt kernel and a matching LinuxCNC. On some hardware this might not offer good enough latency. There is an experimental version available using the RTAI realtime kernel which will often give better latency. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.10989010989010987,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0011839999351650476,
+      "tags": [
+        "trap",
+        "latency",
+        "threshold"
+      ],
+      "answerable": false,
+      "judge": null
+    },
+    {
+      "sample_id": "lc42",
+      "question": "Which LinuxCNC package is listed for Debian 13 in the alternate installation table?",
+      "answer": "Any | Any | Stock | linuxcnc-uspace | simulation ONLY |\n\n> **Note**\n>\n> LinuxCNC v2.9 is not supported on Debian 9 or older.\n\n**Preempt-RT kernels**\n\nThe Preempt-RT kernels are available for Debian from the regular debian.org archive. The package is called `linux-image-rt-*`. Simply install the package in the same way as any other package from the Synaptic Package Manager or with `apt-get` at the command line.\n\n**RTAI Kernels**\n\nThe RTAI kernels are available for download from the linuxcnc.org Debian archive. The apt sources are:\n\n- Debian Bookworm: `deb http://linuxcnc.org bookworm base`\n-… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.08421052631578949,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "refusal_correct": false,
+      "latency_s": 0.0009626001119613647,
+      "tags": [
+        "trap",
+        "Debian 13",
+        "compatibility"
+      ],
+      "answerable": false,
+      "judge": null
+    }
+  ]
+}
