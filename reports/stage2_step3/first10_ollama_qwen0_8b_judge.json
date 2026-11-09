@@ -1,0 +1,381 @@
+{
+  "started_at": 1794240270.9140818,
+  "config": {
+    "ollama": {
+      "host": "http://localhost:11434",
+      "timeout": 600.0
+    },
+    "embeddings": {
+      "model": "qwen3-embedding:0.6b",
+      "batch_size": 1
+    },
+    "llm": {
+      "model": "qwen3.5:0.8b",
+      "temperature": 0.1,
+      "num_ctx": 8192,
+      "think": false,
+      "max_tokens": 1024
+    },
+    "chunking": {
+      "chunk_size": 900,
+      "chunk_overlap": 150,
+      "min_chunk_size": 80
+    },
+    "retrieval": {
+      "top_k": 5,
+      "candidates": 20,
+      "hybrid": true,
+      "rrf_k": 60,
+      "min_score": 0.0
+    },
+    "index_dir": "storage\\index-getting-running"
+  },
+  "summary": {
+    "samples": 10.0,
+    "retrieval/recall@k": 1.0,
+    "retrieval/hit_rate": 1.0,
+    "retrieval/mrr": 1.0,
+    "answer/token_f1": 0.17242399911571588,
+    "answer/must_include": 0.5416666666666667,
+    "citations/precision": 0.8888888888888888,
+    "citations/recall": 0.8888888888888888,
+    "citations/answered_with_citation": 0.8888888888888888,
+    "hallucination/false_refusal_rate": 0.1,
+    "latency/mean_s": 118.74950158998836,
+    "judge/faithfulness": 0.72,
+    "judge/completeness": 0.774,
+    "judge/hallucination_rate": 0.28
+  },
+  "results": [
+    {
+      "sample_id": "lc01",
+      "question": "Which real-time kernel extensions can LinuxCNC use to operate machinery?",
+      "answer": "LinuxCNC поддерживает три реальные время-интерфейсные (real-time) расширения для управления оборудованием: preempt-rt, RTAI и Xenomai. [1]\n\nДля тестирования и симуляции на стандартном ядре LinuxCNC можно использовать приложение `linuxcnc-uspace`, которое работает с ядром LinuxCNC v2.9. Однако в некоторых конфигурациях это может не обеспечить достаточной задержки (latency). Для улучшения задержки рекомендуется использовать экспериментальную версию, которая работает на ядре RTAI [3].",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.22222222222222224,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 139.15084779984318,
+      "tags": [
+        "1.3",
+        "kernel",
+        "installation"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 1.0,
+        "completeness": 1.0,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc02",
+      "question": "Can LinuxCNC be tested on a stock kernel, and which application is used?",
+      "answer": "Да, LinuxCNC может быть тестирован на «стак» (stock) кэере, так как для этого приложения используется приложение `linuxcnc-uspace`. Для теста рекомендуется использовать конфигурацию типа «sim», которая не требует специфической аппаратной поддержки реального времени.",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.16216216216216214,
+      "must_include_coverage": 0.5,
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "refusal_correct": true,
+      "latency_s": 125.06263260007836,
+      "tags": [
+        "1.3",
+        "simulation",
+        "kernel"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 1.0,
+        "completeness": 1.0,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc03",
+      "question": "What is the outlined four-step process for a fresh LinuxCNC installation?",
+      "answer": "Поскольку в контексте нет информации о конкретных вариантах выбора операционной системы (например, Ubuntu или CentOS), ответ на вопрос «какой именно процесс» будет следующим:\n\n1.  **Следует использовать Live/Install Image** [1] для создания нового образа LinuxCNC.\n2.  **Записать этот образ на USB-накопитель или DVD** [1].\n3.  **Запустить Live систему**, чтобы проверить работу программы без изменений в системе [1].\n4.  **Запустить Installer**, чтобы установить LinuxCNC на дискетку компьютера [1].\n\n*Примечание: В разделе 1.3 указано, что для тестирования и симуляции можно использовать приложение `linuxcnc-uspace` на «стаканном» (stock) кэтере, но основной процесс описан выше.*",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.17391304347826086,
+      "must_include_coverage": 0.75,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 134.56004549982026,
+      "tags": [
+        "1.3",
+        "installation",
+        "process"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.85,
+        "completeness": 1.0,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc04",
+      "question": "Where is LinuxCNC software presented for normal download, and which image do most PC users need?",
+      "answer": "LinuxCNC для нормального загрузки представлен на странице проекта [1]. Для большинства пользователей ПК наиболее подходящим изображением является диск-имея Intel/AMD платформ, URL которого выглядит как <https://www.linuxcnc.org/iso/linuxcnc_2.9.4-amd64.hybrid.iso>.\n\n[1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.26666666666666666,
+      "must_include_coverage": 0.5,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 106.9880766000133,
+      "tags": [
+        "1.3.1.1",
+        "download"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.85,
+        "completeness": 0.9,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc05",
+      "question": "Why are multiple LinuxCNC images provided for Raspberry Pi?",
+      "answer": "LinuxCNC предоставляет несколько образов для Raspberry Pi, чтобы обеспечить совместимость с различными версиями операционной системы и специфическими требованиями к процессорам (например, RPi4 и RPi5 имеют разные архитектуры). [2]\n\nВажно учитывать, что использование стандартного Raspbian может привести к отсутствию реального времени (RT) и не позволит миграции с Debian на его собственную систему. Для работы с реальным временем необходимо использовать специализированные изображения, созданные через инструменты, такие как `rpi-img-builder-lcnc`, которые позволяют создать нужные конфигурации для LinuxCNC [3].",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.05970149253731343,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 124.91404150007293,
+      "tags": [
+        "1.3.1.1",
+        "Raspberry Pi",
+        "download"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.85,
+        "completeness": 0.92,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc06",
+      "question": "Why should the regular Raspbian distribution from a Raspberry Pi starter kit not be used for LinuxCNC?",
+      "answer": "В предоставленной документации нет информации для ответа на этот вопрос.",
+      "refused": true,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.0,
+      "must_include_coverage": 0.0,
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "refusal_correct": false,
+      "latency_s": 77.50218989979476,
+      "tags": [
+        "1.3.1.1",
+        "Raspberry Pi",
+        "kernel"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.0,
+        "completeness": 0.0,
+        "unsupported_claims": [
+          "It does not have the real-time kernel",
+          "migration from Raspbian to Debian's kernel image is not possible"
+        ],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc07",
+      "question": "When is zsync useful for downloading the LinuxCNC image?",
+      "answer": "zsync используется для эффективного восстановления и передачи больших файлов, которые могут быть повреждены или не загружены корректно при использовании стандартных методов загрузки (например, Normal Download), если локальная копия отсутствует. В контексте документации [1] указано, что этот инструмент предназначен для тех случаев, когда пользователь сталкивается с трудностями в загрузке изображения через обычный метод.\n\n[1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.06451612903225808,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 126.17511050007306,
+      "tags": [
+        "1.3.1.2",
+        "zsync",
+        "download"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.85,
+        "completeness": 0.92,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc08",
+      "question": "How can zsync be installed on Linux from a terminal?",
+      "answer": "Для установки `zsync` на Linux из терминала выполните команду:\n```bash\nsudo apt-get install zsync\n```\n[1]",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.4545454545454546,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 106.0716897000093,
+      "tags": [
+        "1.3.1.2",
+        "zsync",
+        "command"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.0,
+        "completeness": 0.0,
+        "unsupported_claims": [
+          "zsync is a download application that efficiently resumes interrupted downloads and efficiently transfers large files with small modifications (if you have an older local copy). Use `zsync` if you have trouble downloading the image using the Normal Download method."
+        ],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc09",
+      "question": "Is checksum verification necessary after zsync, and which commands verify a normally downloaded image?",
+      "answer": "Нет, после использования `zsync` не требуется выполнение проверки сдвигов (checksum) для обеспечения целостности файла. [1] указывает, что эта операция ненужна при использовании `zsync`. Для проверки целостности нормального изображения после загрузки используется команда `md5sum` или `sha256sum`, как показано в пункте 1 раздела [2].",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.15384615384615385,
+      "must_include_coverage": 0.6666666666666666,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 126.19285640004091,
+      "tags": [
+        "1.3.1.3",
+        "checksum",
+        "command"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 0.8,
+        "completeness": 1.0,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    },
+    {
+      "sample_id": "lc10",
+      "question": "What SHA-256 checksum is listed for the amd64 LinuxCNC 2.9.4 image?",
+      "answer": "Для проверки целостности файла `linuxcnc-2.9.4-amd64.iso` используется шифр SHA-256, а не MD5. В разделе [1] (файл LinuxCNC_Getting_and_Running_10_pages.md) указан код для проверки:\n\n```bash\nsha256sum linuxcnc-2.9.4-amd64.iso\n```",
+      "refused": false,
+      "retrieved_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "cited_docs": [
+        "LinuxCNC_Getting_and_Running_10_pages.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.16666666666666669,
+      "must_include_coverage": 0.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 120.87752540013753,
+      "tags": [
+        "1.3.1.3",
+        "checksum",
+        "amd64"
+      ],
+      "answerable": true,
+      "judge": {
+        "faithfulness": 1.0,
+        "completeness": 1.0,
+        "unsupported_claims": [],
+        "parsed": true
+      }
+    }
+  ]
+}
