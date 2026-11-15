@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Установка
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[dev,morphology]"
       - name: Линт
         run: ruff check .
       - name: Тесты

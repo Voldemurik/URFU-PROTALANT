@@ -14,6 +14,8 @@ from collections import Counter, defaultdict
 from collections.abc import Iterable
 
 _TOKEN_RE = re.compile(r"\w+", re.UNICODE)
+_CYRILLIC_RE = re.compile(r"[а-я]+")
+_NORMALIZATION_MODES = {"token", "lemma"}
 
 
 def tokenize(text: str) -> list[str]:
@@ -21,10 +23,46 @@ def tokenize(text: str) -> list[str]:
     return [t.lower().replace("ё", "е") for t in _TOKEN_RE.findall(text)]
 
 
+class TokenNormalizer:
+    """Нормализация BM25 с сохранением технических обозначений."""
+
+    def __init__(self, mode: str = "token"):
+        if mode not in _NORMALIZATION_MODES:
+            allowed = ", ".join(sorted(_NORMALIZATION_MODES))
+            raise ValueError(f"Неизвестная нормализация BM25: {mode!r}; допустимо: {allowed}")
+        self.mode = mode
+        self._morph = None
+        self._lemma_cache: dict[str, str] = {}
+        if mode == "lemma":
+            try:
+                import pymorphy3
+            except ModuleNotFoundError as exc:
+                raise ModuleNotFoundError(
+                    "Для bm25_normalization=lemma нужен pymorphy3: "
+                    "pip install techdoc-assistant[morphology]"
+                ) from exc
+            self._morph = pymorphy3.MorphAnalyzer()
+
+    def normalize(self, token: str) -> str:
+        """Лемматизировать только кириллические слова; коды и латиницу сохранить."""
+        if self.mode == "token" or not _CYRILLIC_RE.fullmatch(token):
+            return token
+        lemma = self._lemma_cache.get(token)
+        if lemma is None:
+            lemma = self._morph.parse(token)[0].normal_form
+            self._lemma_cache[token] = lemma
+        return lemma
+
+    def tokenize(self, text: str) -> list[str]:
+        return [self.normalize(token) for token in tokenize(text)]
+
+
 class BM25Index:
-    def __init__(self, k1: float = 1.5, b: float = 0.75):
+    def __init__(self, k1: float = 1.5, b: float = 0.75, normalization: str = "token"):
         self.k1 = k1
         self.b = b
+        self.normalization = normalization
+        self.normalizer = TokenNormalizer(normalization)
         self.doc_lengths: list[int] = []
         self.avg_length = 0.0
         self.term_freqs: list[Counter[str]] = []
@@ -35,7 +73,7 @@ class BM25Index:
         self.doc_lengths, self.term_freqs = [], []
         self.doc_freq = defaultdict(int)
         for text in texts:
-            tokens = tokenize(text)
+            tokens = self.normalizer.tokenize(text)
             counts = Counter(tokens)
             self.term_freqs.append(counts)
             self.doc_lengths.append(len(tokens))
@@ -67,7 +105,7 @@ class BM25Index:
 
     def search(self, query: str, top_k: int = 10) -> list[tuple[int, float]]:
         """Список ``(индекс документа, скор)`` по убыванию скора; нулевые скоры отбрасываются."""
-        query_tokens = tokenize(query)
+        query_tokens = self.normalizer.tokenize(query)
         if not query_tokens or not self.doc_lengths:
             return []
         candidates: set[int] = set()

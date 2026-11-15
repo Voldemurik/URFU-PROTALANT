@@ -1,0 +1,5 @@
+embeddings:
+  batch_size: 1
+retrieval:
+  bm25_normalization: token
+index_dir: storage/index

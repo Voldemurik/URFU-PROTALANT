@@ -1,0 +1,1260 @@
+{
+  "created_at": 1794737527.164078,
+  "documents": "data/sample_docs",
+  "dataset": "data/eval/bm25_morphology_qa.jsonl",
+  "chunks": 25,
+  "top_k": 5,
+  "modes": {
+    "token": {
+      "summary": {
+        "samples": 30,
+        "recall@k": 0.9666666666666667,
+        "hit_rate": 0.9666666666666667,
+        "mrr": 0.7944444444444444,
+        "build_s": 0.0028291000053286552,
+        "mean_search_ms": 0.04212999871621529
+      },
+      "results": [
+        {
+          "id": "m01a",
+          "question": "прогрев шпинделя",
+          "tags": [
+            "morphology",
+            "pair:warmup"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m01b",
+          "question": "прогревом шпинделя",
+          "tags": [
+            "morphology",
+            "pair:warmup"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m02a",
+          "question": "смазка направляющие",
+          "tags": [
+            "morphology",
+            "pair:guides"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m02b",
+          "question": "смазкой направляющих",
+          "tags": [
+            "morphology",
+            "pair:guides"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m03a",
+          "question": "замена фильтр СОЖ",
+          "tags": [
+            "morphology",
+            "pair:coolant-filter"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m03b",
+          "question": "заменой фильтра СОЖ",
+          "tags": [
+            "morphology",
+            "pair:coolant-filter"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m04a",
+          "question": "замена масло шпиндельная бабка",
+          "tags": [
+            "morphology",
+            "pair:spindle-oil"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m04b",
+          "question": "заменой масла шпиндельной бабки",
+          "tags": [
+            "morphology",
+            "pair:spindle-oil"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m05a",
+          "question": "хранение станок",
+          "tags": [
+            "morphology",
+            "pair:storage"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8",
+            "fs400_rukovodstvo_po_ekspluatacii.md#1",
+            "fs400_rukovodstvo_po_ekspluatacii.md#0",
+            "fs400_rukovodstvo_po_ekspluatacii.md#3",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m05b",
+          "question": "хранением станка",
+          "tags": [
+            "morphology",
+            "pair:storage"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#0",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "plk200_reglament_obsluzhivaniya.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2"
+          ],
+          "rank": null,
+          "recall_at_k": 0.0,
+          "hit_rate": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "id": "m06a",
+          "question": "очистка рабочая зона",
+          "tags": [
+            "morphology",
+            "pair:cleaning-zone"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#2",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m06b",
+          "question": "очисткой рабочей зоны",
+          "tags": [
+            "morphology",
+            "pair:cleaning-zone"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m07a",
+          "question": "датчик сход лента",
+          "tags": [
+            "morphology",
+            "pair:belt-sensor"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "plk200_reglament_obsluzhivaniya.md#7"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m07b",
+          "question": "датчиком схода ленты",
+          "tags": [
+            "morphology",
+            "pair:belt-sensor"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m08a",
+          "question": "смазка подшипник роликоопора",
+          "tags": [
+            "morphology",
+            "pair:bearing-grease"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m08b",
+          "question": "смазкой подшипников роликоопор",
+          "tags": [
+            "morphology",
+            "pair:bearing-grease"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m09a",
+          "question": "натяжение лента",
+          "tags": [
+            "morphology",
+            "pair:belt-tension"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m09b",
+          "question": "натяжением ленты",
+          "tags": [
+            "morphology",
+            "pair:belt-tension"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 3,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "id": "m10a",
+          "question": "замена батарея",
+          "tags": [
+            "morphology",
+            "pair:battery"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m10b",
+          "question": "заменой батареи",
+          "tags": [
+            "morphology",
+            "pair:battery"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m11a",
+          "question": "копирование программа",
+          "tags": [
+            "morphology",
+            "pair:backup"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#3",
+            "plk200_reglament_obsluzhivaniya.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m11b",
+          "question": "копированием программы",
+          "tags": [
+            "morphology",
+            "pair:backup"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m12a",
+          "question": "проверка изоляция",
+          "tags": [
+            "morphology",
+            "pair:insulation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m12b",
+          "question": "проверкой изоляции",
+          "tags": [
+            "morphology",
+            "pair:insulation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m13a",
+          "question": "очистка вентиляционные отверстия",
+          "tags": [
+            "morphology",
+            "pair:ventilation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "m13b",
+          "question": "очисткой вентиляционных отверстий",
+          "tags": [
+            "morphology",
+            "pair:ventilation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c01",
+          "question": "E12",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "c02",
+          "question": "CR2032",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c03",
+          "question": "OC",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c04",
+          "question": "E21",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "plk200_reglament_obsluzhivaniya.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      ]
+    },
+    "lemma": {
+      "summary": {
+        "samples": 30,
+        "recall@k": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.9833333333333333,
+        "build_s": 0.4253851999528706,
+        "mean_search_ms": 0.30980999387490255
+      },
+      "results": [
+        {
+          "id": "m01a",
+          "question": "прогрев шпинделя",
+          "tags": [
+            "morphology",
+            "pair:warmup"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5",
+            "fs400_rukovodstvo_po_ekspluatacii.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m01b",
+          "question": "прогревом шпинделя",
+          "tags": [
+            "morphology",
+            "pair:warmup"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5",
+            "fs400_rukovodstvo_po_ekspluatacii.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m02a",
+          "question": "смазка направляющие",
+          "tags": [
+            "morphology",
+            "pair:guides"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m02b",
+          "question": "смазкой направляющих",
+          "tags": [
+            "morphology",
+            "pair:guides"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m03a",
+          "question": "замена фильтр СОЖ",
+          "tags": [
+            "morphology",
+            "pair:coolant-filter"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m03b",
+          "question": "заменой фильтра СОЖ",
+          "tags": [
+            "morphology",
+            "pair:coolant-filter"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m04a",
+          "question": "замена масло шпиндельная бабка",
+          "tags": [
+            "morphology",
+            "pair:spindle-oil"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m04b",
+          "question": "заменой масла шпиндельной бабки",
+          "tags": [
+            "morphology",
+            "pair:spindle-oil"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m05a",
+          "question": "хранение станок",
+          "tags": [
+            "morphology",
+            "pair:storage"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8",
+            "fs400_rukovodstvo_po_ekspluatacii.md#0",
+            "fs400_rukovodstvo_po_ekspluatacii.md#1",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m05b",
+          "question": "хранением станка",
+          "tags": [
+            "morphology",
+            "pair:storage"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#8",
+            "fs400_rukovodstvo_po_ekspluatacii.md#0",
+            "fs400_rukovodstvo_po_ekspluatacii.md#1",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m06a",
+          "question": "очистка рабочая зона",
+          "tags": [
+            "morphology",
+            "pair:cleaning-zone"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m06b",
+          "question": "очисткой рабочей зоны",
+          "tags": [
+            "morphology",
+            "pair:cleaning-zone"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#2",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m07a",
+          "question": "датчик сход лента",
+          "tags": [
+            "morphology",
+            "pair:belt-sensor"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m07b",
+          "question": "датчиком схода ленты",
+          "tags": [
+            "morphology",
+            "pair:belt-sensor"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m08a",
+          "question": "смазка подшипник роликоопора",
+          "tags": [
+            "morphology",
+            "pair:bearing-grease"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#4",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m08b",
+          "question": "смазкой подшипников роликоопор",
+          "tags": [
+            "morphology",
+            "pair:bearing-grease"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#4",
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m09a",
+          "question": "натяжение лента",
+          "tags": [
+            "morphology",
+            "pair:belt-tension"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m09b",
+          "question": "натяжением ленты",
+          "tags": [
+            "morphology",
+            "pair:belt-tension"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#3",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#1",
+            "kl12_konveyer_poisk_neispravnostey.md#5",
+            "kl12_konveyer_poisk_neispravnostey.md#2"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m10a",
+          "question": "замена батарея",
+          "tags": [
+            "morphology",
+            "pair:battery"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m10b",
+          "question": "заменой батареи",
+          "tags": [
+            "morphology",
+            "pair:battery"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "kl12_konveyer_poisk_neispravnostey.md#6",
+            "plk200_reglament_obsluzhivaniya.md#3"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m11a",
+          "question": "копирование программа",
+          "tags": [
+            "morphology",
+            "pair:backup"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#3",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m11b",
+          "question": "копированием программы",
+          "tags": [
+            "morphology",
+            "pair:backup"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#6",
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "plk200_reglament_obsluzhivaniya.md#5",
+            "plk200_reglament_obsluzhivaniya.md#3",
+            "fs400_rukovodstvo_po_ekspluatacii.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m12a",
+          "question": "проверка изоляция",
+          "tags": [
+            "morphology",
+            "pair:insulation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m12b",
+          "question": "проверкой изоляции",
+          "tags": [
+            "morphology",
+            "pair:insulation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7",
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "kl12_konveyer_poisk_neispravnostey.md#6"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m13a",
+          "question": "очистка вентиляционные отверстия",
+          "tags": [
+            "morphology",
+            "pair:ventilation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "m13b",
+          "question": "очисткой вентиляционных отверстий",
+          "tags": [
+            "morphology",
+            "pair:ventilation"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#4",
+            "fs400_rukovodstvo_po_ekspluatacii.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c01",
+          "question": "E12",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "fs400_rukovodstvo_po_ekspluatacii.md#5"
+          ],
+          "rank": 2,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "id": "c02",
+          "question": "CR2032",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "retrieved_chunks": [
+            "plk200_reglament_obsluzhivaniya.md#5"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c03",
+          "question": "OC",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "retrieved_chunks": [
+            "kl12_konveyer_poisk_neispravnostey.md#4"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "id": "c04",
+          "question": "E21",
+          "tags": [
+            "technical_control"
+          ],
+          "relevant_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6"
+          ],
+          "retrieved_chunks": [
+            "fs400_rukovodstvo_po_ekspluatacii.md#6",
+            "plk200_reglament_obsluzhivaniya.md#7"
+          ],
+          "rank": 1,
+          "recall_at_k": 1.0,
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "improved": 10,
+    "worsened": 0,
+    "unchanged": 20
+  }
+}
