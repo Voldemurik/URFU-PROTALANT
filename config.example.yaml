@@ -26,6 +26,7 @@ retrieval:
   top_k: 5                       # сколько фрагментов попадает в промпт
   candidates: 20                 # кандидатов из каждого поиска до слияния
   hybrid: true                   # векторный + BM25 (Reciprocal Rank Fusion)
+  bm25_normalization: token      # token — исходные словоформы; lemma — русские леммы (extra: morphology)
   rrf_k: 60
   min_score: 0.0                 # отсечка по RRF-скору; шкала мала: максимум 2/(rrf_k+1) ≈ 0.033, обычно 0.01–0.03
 

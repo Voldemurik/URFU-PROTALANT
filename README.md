@@ -88,7 +88,7 @@ git clone https://github.com/Voldemurik/URFU-PROTALANT.git
 cd URFU-PROTALANT
 python -m venv .venv
 .venv\Scripts\activate        # Linux/macOS: source .venv/bin/activate
-python -m pip install -e ".[all]"  # приложение + PDF/DOCX + FAISS + pytest/Ruff
+python -m pip install -e ".[all]"  # приложение + PDF/DOCX + FAISS + морфология + pytest/Ruff
 
 # 3. Проверка окружения
 techdoc doctor
@@ -101,6 +101,8 @@ techdoc chat                  # интерактивный режим
 # 5. Оценка качества на учебном наборе
 techdoc eval data/eval/sample_qa.jsonl --judge --report-md reports/qwen0.8b.md
 ```
+
+Для русской морфологии BM25 установите extra `morphology` (уже входит в `.[all]`) и укажите `retrieval.bm25_normalization: lemma` в YAML. По умолчанию используется совместимый режим `token`; сравнение «до/после» описано в [системе оценки](docs/evaluation.md).
 
 Вариант `.[all]` уже включает `pytest` и Ruff. Для разработки запустите те же проверки, что и CI:
 
@@ -221,7 +223,7 @@ URFU-PROTALANT/
 | LLM | `qwen3.5:0.8b` (по умолчанию), `qwen3.5:4b`, `qwen3.5:9b`, `gemma4:12b` | сильный русский, контекст 256K, мультимодальность (сканы и чертежи на этапе 5), работают на потребительских GPU |
 | Эмбеддинги | `qwen3-embedding:0.6b` | многоязычная, лёгкая (~0,6 ГБ), быстрая на CPU; альтернатива — `bge-m3` |
 | Векторный поиск | FAISS (`IndexFlatIP`) или NumPy | точный поиск, нулевая инфраструктура |
-| Лексический поиск | BM25 (свой, ~100 строк) | прозрачность; точные коды и артикулы |
+| Лексический поиск | BM25 (свой) + опциональная лемматизация `pymorphy3` | прозрачность; точные коды и артикулы; режимы `token`/`lemma` |
 | Дообучение | `peft` + `transformers` (LoRA/QLoRA) | адаптер в десятки МБ, обучение на одной GPU |
 | Качество кода | `ruff`, `pytest`, GitHub Actions | проверки при push в `main` и при каждом pull request |
 

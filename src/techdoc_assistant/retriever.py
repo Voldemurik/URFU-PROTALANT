@@ -38,11 +38,16 @@ class HybridRetriever:
         self.store = store
         self.embedder = embedder
         self.cfg = cfg or RetrievalConfig()
-        self.bm25 = BM25Index().build(chunk.index_text() for chunk in store.chunks)
+        self.bm25 = self._build_bm25()
+
+    def _build_bm25(self) -> BM25Index:
+        return BM25Index(normalization=self.cfg.bm25_normalization).build(
+            chunk.index_text() for chunk in self.store.chunks
+        )
 
     def refresh(self) -> None:
         """Перестроить лексический индекс после добавления чанков в хранилище."""
-        self.bm25 = BM25Index().build(chunk.index_text() for chunk in self.store.chunks)
+        self.bm25 = self._build_bm25()
 
     def retrieve(self, query: str, top_k: int | None = None) -> list[Hit]:
         top_k = top_k or self.cfg.top_k

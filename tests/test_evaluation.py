@@ -112,3 +112,35 @@ def test_report_save_json(extractive_pipeline, tmp_path):
     report.save_json(path)
     data = json.loads(path.read_text(encoding="utf-8"))
     assert data["summary"]["retrieval/hit_rate"] == 1.0
+
+
+def test_optional_chunk_metrics_are_scored_and_aggregated():
+    from techdoc_assistant.documents import Chunk
+    from techdoc_assistant.evaluation.runner import EvalReport, score_sample
+    from techdoc_assistant.rag import Answer
+    from techdoc_assistant.retriever import Hit
+
+    chunks = [Chunk(chunk_id=f"d#{i}", doc_id="d", source="d", text=str(i), position=i) for i in range(2)]
+    answer = Answer(question="q", text="a", hits=[Hit(chunk=chunk, score=1.0) for chunk in chunks])
+    sample = EvalSample(id="x", question="q", relevant_docs=["d"], relevant_chunks=["d#1"])
+    result = score_sample(sample, answer)
+    assert result.retrieved_chunks == ["d#0", "d#1"]
+    assert result.chunk_recall_at_k == 1.0
+    assert result.chunk_hit_rate == 1.0
+    assert result.chunk_mrr == pytest.approx(0.5)
+    summary = EvalReport(results=[result]).aggregate()
+    assert summary["retrieval/chunk_labeled_samples"] == 1.0
+    assert summary["retrieval/chunk_mrr"] == pytest.approx(0.5)
+
+
+def test_chunk_metrics_are_omitted_without_labels():
+    from techdoc_assistant.documents import Chunk
+    from techdoc_assistant.evaluation.runner import EvalReport, score_sample
+    from techdoc_assistant.rag import Answer
+    from techdoc_assistant.retriever import Hit
+
+    chunk = Chunk(chunk_id="d#0", doc_id="d", source="d", text="text", position=0)
+    answer = Answer(question="q", text="a", hits=[Hit(chunk=chunk, score=1.0)])
+    result = score_sample(EvalSample(id="x", question="q", relevant_docs=["d"]), answer)
+    assert result.chunk_mrr is None
+    assert "retrieval/chunk_mrr" not in EvalReport(results=[result]).aggregate()

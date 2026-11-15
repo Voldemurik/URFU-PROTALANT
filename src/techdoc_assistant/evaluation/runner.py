@@ -25,6 +25,7 @@ class SampleResult:
     answer: str
     refused: bool
     retrieved_docs: list[str]
+    retrieved_chunks: list[str]
     cited_docs: list[str]
     recall_at_k: float
     hit_rate: float
@@ -35,6 +36,9 @@ class SampleResult:
     citation_recall: float
     refusal_correct: bool
     latency_s: float
+    chunk_recall_at_k: float | None = None
+    chunk_hit_rate: float | None = None
+    chunk_mrr: float | None = None
     tags: list[str] = field(default_factory=list)
     answerable: bool = True
     judge: dict[str, Any] | None = None
@@ -53,6 +57,7 @@ class EvalReport:
         answered = [r for r in answerable if not r.refused]
         traps = [r for r in self.results if not r.answerable]
         judged = [r for r in self.results if r.judge and r.judge.get("parsed")]
+        chunk_scored = [r for r in answerable if r.chunk_mrr is not None]
 
         summary: dict[str, float] = {"samples": float(len(self.results))}
 
@@ -63,6 +68,17 @@ class EvalReport:
         put("retrieval/recall@k", [r.recall_at_k for r in answerable])
         put("retrieval/hit_rate", [r.hit_rate for r in answerable])
         put("retrieval/mrr", [r.mrr for r in answerable])
+        if chunk_scored:
+            summary["retrieval/chunk_labeled_samples"] = float(len(chunk_scored))
+        put(
+            "retrieval/chunk_recall@k",
+            [r.chunk_recall_at_k for r in answerable if r.chunk_recall_at_k is not None],
+        )
+        put(
+            "retrieval/chunk_hit_rate",
+            [r.chunk_hit_rate for r in answerable if r.chunk_hit_rate is not None],
+        )
+        put("retrieval/chunk_mrr", [r.chunk_mrr for r in chunk_scored if r.chunk_mrr is not None])
         put("answer/token_f1", [r.token_f1 for r in answerable])
         put("answer/must_include", [r.must_include_coverage for r in answerable])
         put("citations/precision", [r.citation_precision for r in answered])
@@ -135,14 +151,17 @@ def evaluate(
 
 def score_sample(sample: EvalSample, answer: Answer) -> SampleResult:
     retrieved = _unique(hit.chunk.doc_id for hit in answer.hits)
+    retrieved_chunks = _unique(hit.chunk.chunk_id for hit in answer.hits)
     cited = answer.cited_doc_ids
     refusal_correct = answer.refused if not sample.answerable else not answer.refused
+    has_chunk_labels = bool(sample.relevant_chunks)
     return SampleResult(
         sample_id=sample.id,
         question=sample.question,
         answer=answer.text,
         refused=answer.refused,
         retrieved_docs=retrieved,
+        retrieved_chunks=retrieved_chunks,
         cited_docs=cited,
         recall_at_k=m.recall_at_k(retrieved, sample.relevant_docs),
         hit_rate=m.hit_rate(retrieved, sample.relevant_docs),
@@ -153,6 +172,11 @@ def score_sample(sample: EvalSample, answer: Answer) -> SampleResult:
         citation_recall=m.citation_recall(cited, sample.relevant_docs),
         refusal_correct=refusal_correct,
         latency_s=answer.latency_s,
+        chunk_recall_at_k=(
+            m.recall_at_k(retrieved_chunks, sample.relevant_chunks) if has_chunk_labels else None
+        ),
+        chunk_hit_rate=m.hit_rate(retrieved_chunks, sample.relevant_chunks) if has_chunk_labels else None,
+        chunk_mrr=m.mrr(retrieved_chunks, sample.relevant_chunks) if has_chunk_labels else None,
         tags=list(sample.tags),
         answerable=sample.answerable,
     )

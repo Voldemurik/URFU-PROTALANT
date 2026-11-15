@@ -1,0 +1,1195 @@
+{
+  "started_at": 1794737761.3990602,
+  "config": {
+    "ollama": {
+      "host": "http://localhost:11434",
+      "timeout": 600.0
+    },
+    "embeddings": {
+      "model": "qwen3-embedding:0.6b",
+      "batch_size": 1
+    },
+    "llm": {
+      "model": "qwen3.5:0.8b",
+      "temperature": 0.1,
+      "num_ctx": 8192,
+      "think": false,
+      "max_tokens": 1024
+    },
+    "chunking": {
+      "chunk_size": 900,
+      "chunk_overlap": 150,
+      "min_chunk_size": 80
+    },
+    "retrieval": {
+      "top_k": 5,
+      "candidates": 20,
+      "hybrid": true,
+      "bm25_normalization": "lemma",
+      "rrf_k": 60,
+      "min_score": 0.0
+    },
+    "index_dir": "reports\\stage3_step1\\sample_index"
+  },
+  "summary": {
+    "samples": 30.0,
+    "retrieval/recall@k": 1.0,
+    "retrieval/hit_rate": 1.0,
+    "retrieval/mrr": 0.95,
+    "retrieval/chunk_labeled_samples": 30.0,
+    "retrieval/chunk_recall@k": 1.0,
+    "retrieval/chunk_hit_rate": 1.0,
+    "retrieval/chunk_mrr": 0.9166666666666666,
+    "answer/token_f1": 0.15749544468682217,
+    "answer/must_include": 1.0,
+    "citations/precision": 0.9,
+    "citations/recall": 0.9,
+    "citations/answered_with_citation": 1.0,
+    "hallucination/false_refusal_rate": 0.0,
+    "latency/mean_s": 0.0010596400029802074
+  },
+  "results": [
+    {
+      "sample_id": "m01a",
+      "question": "прогрев шпинделя",
+      "answer": "4.1. Перед включением убедитесь, что давление в пневмосети составляет не менее 0,5 МПа, а уровень СОЖ находится между отметками MIN и MAX смотрового окна бака.\n\n4.2. Включите главный выключатель, дождитесь загрузки системы ЧПУ (около 90 секунд) и выполните возврат осей в референтную точку командой HOME.\n\n4.3. Прогрев шпинделя обязателен перед началом смены и после простоя более 4 часов: 10 минут на частоте 3000 об/мин без нагрузки. Пропуск прогрева сокращает ресурс подшипников шпинделя.\n\n4.4. Проверьте правильность установки инструмента в магазине и соответствие номеров инструментов… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.18604651162790697,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0008749000262469053,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:warmup"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m01b",
+      "question": "прогревом шпинделя",
+      "answer": "4.1. Перед включением убедитесь, что давление в пневмосети составляет не менее 0,5 МПа, а уровень СОЖ находится между отметками MIN и MAX смотрового окна бака.\n\n4.2. Включите главный выключатель, дождитесь загрузки системы ЧПУ (около 90 секунд) и выполните возврат осей в референтную точку командой HOME.\n\n4.3. Прогрев шпинделя обязателен перед началом смены и после простоя более 4 часов: 10 минут на частоте 3000 об/мин без нагрузки. Пропуск прогрева сокращает ресурс подшипников шпинделя.\n\n4.4. Проверьте правильность установки инструмента в магазине и соответствие номеров инструментов… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.18604651162790697,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.001201000006403774,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:warmup"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m02a",
+      "question": "смазка направляющие",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#2",
+        "kl12_konveyer_poisk_neispravnostey.md#1"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.11428571428571428,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.000666000007186085,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:guides"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m02b",
+      "question": "смазкой направляющих",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#1"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.11428571428571428,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0005799999926239252,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:guides"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m03a",
+      "question": "замена фильтр СОЖ",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.11428571428571428,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0011078999959863722,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:coolant-filter"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m03b",
+      "question": "заменой фильтра СОЖ",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.11428571428571428,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0009837999823503196,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:coolant-filter"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m04a",
+      "question": "замена масло шпиндельная бабка",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.2666666666666666,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017042999970726669,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:spindle-oil"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m04b",
+      "question": "заменой масла шпиндельной бабки",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md",
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "plk200_reglament_obsluzhivaniya.md#7"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.2666666666666666,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0016709000337868929,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:spindle-oil"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m05a",
+      "question": "хранение станок",
+      "answer": "Станок транспортируется в вертикальном положении с зафиксированными осями. Хранение допускается при температуре от −10 до +40 °C в сухом помещении. Перед вводом в эксплуатацию после хранения при отрицательной температуре станок выдерживается в цехе не менее 24 часов. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#8",
+        "fs400_rukovodstvo_po_ekspluatacii.md#1",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#0",
+        "fs400_rukovodstvo_po_ekspluatacii.md#6"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3888888888888889,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0007802000036463141,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:storage"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m05b",
+      "question": "хранением станка",
+      "answer": "Станок транспортируется в вертикальном положении с зафиксированными осями. Хранение допускается при температуре от −10 до +40 °C в сухом помещении. Перед вводом в эксплуатацию после хранения при отрицательной температуре станок выдерживается в цехе не менее 24 часов. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#8",
+        "fs400_rukovodstvo_po_ekspluatacii.md#0",
+        "plk200_reglament_obsluzhivaniya.md#7",
+        "fs400_rukovodstvo_po_ekspluatacii.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3888888888888889,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0010640000109560788,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:storage"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m06a",
+      "question": "очистка рабочая зона",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "plk200_reglament_obsluzhivaniya.md#2",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.057971014492753624,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0008067999733611941,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:cleaning-zone"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m06b",
+      "question": "очисткой рабочей зоны",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2",
+        "plk200_reglament_obsluzhivaniya.md#2",
+        "fs400_rukovodstvo_po_ekspluatacii.md#3"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.057971014492753624,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.001087700016796589,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:cleaning-zone"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m07a",
+      "question": "датчик сход лента",
+      "answer": "Датчики ДСЛ-2 установлены попарно с каждой стороны ленты в головной и хвостовой части конвейера. Датчик срабатывает при отклонении кромки ленты на 40 мм от нормального положения и останавливает привод. После устранения причины схода датчик сбрасывается кнопкой RESET на шкафу управления; автоматический перезапуск не предусмотрен. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.34782608695652173,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0008126000175252557,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:belt-sensor"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m07b",
+      "question": "датчиком схода ленты",
+      "answer": "Датчики ДСЛ-2 установлены попарно с каждой стороны ленты в головной и хвостовой части конвейера. Датчик срабатывает при отклонении кромки ленты на 40 мм от нормального положения и останавливает привод. После устранения причины схода датчик сбрасывается кнопкой RESET на шкафу управления; автоматический перезапуск не предусмотрен. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.34782608695652173,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0011249000090174377,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:belt-sensor"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m08a",
+      "question": "смазка подшипник роликоопора",
+      "answer": "- Подшипники роликоопор и барабанов смазываются каждые 250 часов работы литиевой смазкой; количество — до появления свежей смазки из уплотнения.\n- Редуктор привода: проверка уровня масла ежемесячно, замена масла каждые 4000 часов.\n- Натяжение ленты проверяется еженедельно, состояние стыка ленты — ежемесячно.\n- Датчики схода ленты проверяются на срабатывание ежемесячно принудительным отклонением флажка. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3076923076923077,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0017327999812550843,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:bearing-grease"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m08b",
+      "question": "смазкой подшипников роликоопор",
+      "answer": "- Подшипники роликоопор и барабанов смазываются каждые 250 часов работы литиевой смазкой; количество — до появления свежей смазки из уплотнения.\n- Редуктор привода: проверка уровня масла ежемесячно, замена масла каждые 4000 часов.\n- Натяжение ленты проверяется еженедельно, состояние стыка ленты — ежемесячно.\n- Датчики схода ленты проверяются на срабатывание ежемесячно принудительным отклонением флажка. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.3076923076923077,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0009415000095032156,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:bearing-grease"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m09a",
+      "question": "натяжение лента",
+      "answer": "| Признак | Возможная причина | Действия |\n|---|---|---|\n| Лента смещается в сторону | Неравномерное натяжение; загрязнение приводного или натяжного барабана; перекос роликоопор | Отрегулировать натяжные винты со стороны, в которую уходит лента, поворачивая их по 1/4 оборота и проверяя результат после каждого полного оборота ленты; очистить барабаны; проверить перпендикулярность роликоопор |\n| Лента проскальзывает на приводном барабане | Недостаточное натяжение; замасливание барабана | Увеличить натяжение до стрелы провисания 1–2 % от расстояния между роликоопорами; очистить и обезжирить… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#2"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.06451612903225806,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0013747999910265207,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:belt-tension"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m09b",
+      "question": "натяжением ленты",
+      "answer": "| Признак | Возможная причина | Действия |\n|---|---|---|\n| Лента смещается в сторону | Неравномерное натяжение; загрязнение приводного или натяжного барабана; перекос роликоопор | Отрегулировать натяжные винты со стороны, в которую уходит лента, поворачивая их по 1/4 оборота и проверяя результат после каждого полного оборота ленты; очистить барабаны; проверить перпендикулярность роликоопор |\n| Лента проскальзывает на приводном барабане | Недостаточное натяжение; замасливание барабана | Увеличить натяжение до стрелы провисания 1–2 % от расстояния между роликоопорами; очистить и обезжирить… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#2"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.06451612903225806,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0011680999887175858,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:belt-tension"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m10a",
+      "question": "замена батарея",
+      "answer": "5.1. В контроллере используется литиевая батарея типа CR2032. Плановая замена выполняется каждые 3 года либо немедленно при загорании индикатора BAT.\n\n5.2. Перед заменой обязательно выполните резервное копирование программы (раздел 6).\n\n5.3. Замена выполняется при включённом питании контроллера — в этом случае содержимое энергонезависимой памяти и показания часов сохраняются. Если замена при включённом питании невозможна, батарея должна быть установлена не позднее чем через 30 секунд после извлечения старой.\n\n5.4. После замены проверьте, что индикатор BAT погас, и установите дату и время в… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#6"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.12987012987012989,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0007885000086389482,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:battery"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m10b",
+      "question": "заменой батареи",
+      "answer": "5.1. В контроллере используется литиевая батарея типа CR2032. Плановая замена выполняется каждые 3 года либо немедленно при загорании индикатора BAT.\n\n5.2. Перед заменой обязательно выполните резервное копирование программы (раздел 6).\n\n5.3. Замена выполняется при включённом питании контроллера — в этом случае содержимое энергонезависимой памяти и показания часов сохраняются. Если замена при включённом питании невозможна, батарея должна быть установлена не позднее чем через 30 секунд после извлечения старой.\n\n5.4. После замены проверьте, что индикатор BAT погас, и установите дату и время в… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#6"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.12987012987012989,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0007447000243701041,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:battery"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m11a",
+      "question": "копирование программа",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Визуальный контроль индикаторов PWR, RUN, ERR, BAT |\n| Ежемесячно | Очистка корпуса и вентиляционных отверстий от пыли, проверка затяжки клеммных соединений (момент затяжки 0,5 Н·м) |\n| Ежеквартально | Резервное копирование пользовательской программы и параметров |\n| Ежегодно | Проверка сопротивления изоляции цепей питания, проверка напряжения батареи |\n| Каждые 3 года | Плановая замена батареи резервного питания | [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "plk200_reglament_obsluzhivaniya.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#3"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.03571428571428571,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0008054000209085643,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 0.5,
+      "tags": [
+        "morphology",
+        "pair:backup"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m11b",
+      "question": "копированием программы",
+      "answer": "Резервная копия программы и параметров создаётся в утилите PLC Studio через порт Ethernet или последовательный порт RS-485. Файл резервной копии имеет расширение `.plcbak`; в имени файла указываются номер контроллера и дата, например `PLC200-07_2026-08-15.plcbak`. Копии хранятся на сервере отдела АСУ ТП не менее одного года. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#6",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "plk200_reglament_obsluzhivaniya.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#4"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.24489795918367346,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0010942000080831349,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:backup"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m12a",
+      "question": "проверка изоляция",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#6",
+        "kl12_konveyer_poisk_neispravnostey.md#1"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 0.5,
+      "token_f1": 0.02857142857142857,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "refusal_correct": true,
+      "latency_s": 0.0014291999978013337,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 0.5,
+      "tags": [
+        "morphology",
+        "pair:insulation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m12b",
+      "question": "проверкой изоляции",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Очистка рабочей зоны от стружки, проверка уровня СОЖ, осмотр ограждений |\n| Еженедельно | Смазка направляющих через централизованную систему, проверка давления воздуха |\n| Каждые 500 часов | Замена фильтра СОЖ, очистка бака |\n| Каждые 2000 часов | Проверка люфта шарико-винтовых передач, замена масла в шпиндельной бабке |\n| Ежегодно | Проверка геометрической точности, калибровка датчика инструмента |\n\nПри замене масла в шпиндельной бабке используется масло вязкости ISO VG 32, объём заправки 1,2 л. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "plk200_reglament_obsluzhivaniya.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#6",
+        "plk200_reglament_obsluzhivaniya.md#2"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 0.5,
+      "token_f1": 0.02857142857142857,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "refusal_correct": true,
+      "latency_s": 0.0013028000248596072,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 0.5,
+      "tags": [
+        "morphology",
+        "pair:insulation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m13a",
+      "question": "очистка вентиляционные отверстия",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Визуальный контроль индикаторов PWR, RUN, ERR, BAT |\n| Ежемесячно | Очистка корпуса и вентиляционных отверстий от пыли, проверка затяжки клеммных соединений (момент затяжки 0,5 Н·м) |\n| Ежеквартально | Резервное копирование пользовательской программы и параметров |\n| Ежегодно | Проверка сопротивления изоляции цепей питания, проверка напряжения батареи |\n| Каждые 3 года | Плановая замена батареи резервного питания | [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.07272727272727272,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.002430399996228516,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:ventilation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "m13b",
+      "question": "очисткой вентиляционных отверстий",
+      "answer": "| Периодичность | Работы |\n|---|---|\n| Ежедневно | Визуальный контроль индикаторов PWR, RUN, ERR, BAT |\n| Ежемесячно | Очистка корпуса и вентиляционных отверстий от пыли, проверка затяжки клеммных соединений (момент затяжки 0,5 Н·м) |\n| Ежеквартально | Резервное копирование пользовательской программы и параметров |\n| Ежегодно | Проверка сопротивления изоляции цепей питания, проверка напряжения батареи |\n| Каждые 3 года | Плановая замена батареи резервного питания | [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#4",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7",
+        "plk200_reglament_obsluzhivaniya.md#2",
+        "kl12_konveyer_poisk_neispravnostey.md#3",
+        "kl12_konveyer_poisk_neispravnostey.md#1"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.07272727272727272,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0011347999679856002,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "morphology",
+        "pair:ventilation"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "c01",
+      "question": "E12",
+      "answer": "| Код | Описание | Действия оператора |\n|---|---|---|\n| E21 | Потеря связи с контроллером ПЛК-200 | Проверить кабель связи и индикаторы контроллера; при повторении вызвать сервисную службу |\n\nСброс ошибки выполняется кнопкой RESET на пульте оператора после устранения причины. Если ошибка E12 повторяется чаще двух раз за смену, эксплуатация станка запрещается до проверки сервисной службой. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "fs400_rukovodstvo_po_ekspluatacii.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5",
+        "fs400_rukovodstvo_po_ekspluatacii.md#2",
+        "kl12_konveyer_poisk_neispravnostey.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#7"
+      ],
+      "cited_docs": [
+        "fs400_rukovodstvo_po_ekspluatacii.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.04347826086956521,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0006157000316306949,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 0.5,
+      "tags": [
+        "technical_control"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "c02",
+      "question": "CR2032",
+      "answer": "5.1. В контроллере используется литиевая батарея типа CR2032. Плановая замена выполняется каждые 3 года либо немедленно при загорании индикатора BAT.\n\n5.2. Перед заменой обязательно выполните резервное копирование программы (раздел 6).\n\n5.3. Замена выполняется при включённом питании контроллера — в этом случае содержимое энергонезависимой памяти и показания часов сохраняются. Если замена при включённом питании невозможна, батарея должна быть установлена не позднее чем через 30 секунд после извлечения старой.\n\n5.4. После замены проверьте, что индикатор BAT погас, и установите дату и время в… [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#5",
+        "fs400_rukovodstvo_po_ekspluatacii.md#5",
+        "kl12_konveyer_poisk_neispravnostey.md#7",
+        "plk200_reglament_obsluzhivaniya.md#0",
+        "fs400_rukovodstvo_po_ekspluatacii.md#7"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.08,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0006145999650470912,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "technical_control"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "c03",
+      "question": "OC",
+      "answer": "| Признак | Возможная причина | Действия |\n|---|---|---|\n| Повышенный шум или нагрев роликов | Износ подшипников; отсутствие смазки | Заменить ролик; выполнить смазку по графику |\n| Частотный преобразователь показывает ошибку OC | Перегрузка по току: заклинивание ролика, перегруз ленты | Устранить заклинивание, уменьшить загрузку, перезапустить преобразователь | [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "kl12_konveyer_poisk_neispravnostey.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#2",
+        "kl12_konveyer_poisk_neispravnostey.md#7",
+        "kl12_konveyer_poisk_neispravnostey.md#1",
+        "kl12_konveyer_poisk_neispravnostey.md#5"
+      ],
+      "cited_docs": [
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 1.0,
+      "token_f1": 0.09756097560975609,
+      "must_include_coverage": 1.0,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "refusal_correct": true,
+      "latency_s": 0.0005462000262923539,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 1.0,
+      "tags": [
+        "technical_control"
+      ],
+      "answerable": true,
+      "judge": null
+    },
+    {
+      "sample_id": "c04",
+      "question": "E21",
+      "answer": "- Постоянное свечение ERR: выключить питание на 10 секунд и включить снова. Если ошибка сохраняется, заменить контроллер из ЗИП и передать неисправный в ремонт.\n- Мигание ERR: по журналу событий в PLC Studio определить номер модуля и канала, проверить датчик и линию связи.\n- Свечение BAT: заменить батарею согласно разделу 5.\n- Потеря связи с ЧПУ станка (на станке ошибка E21): проверить кабель связи, состояние индикатора RUN и настройки сетевого адреса. [1]",
+      "refused": false,
+      "retrieved_docs": [
+        "plk200_reglament_obsluzhivaniya.md",
+        "fs400_rukovodstvo_po_ekspluatacii.md",
+        "kl12_konveyer_poisk_neispravnostey.md"
+      ],
+      "retrieved_chunks": [
+        "plk200_reglament_obsluzhivaniya.md#7",
+        "fs400_rukovodstvo_po_ekspluatacii.md#6",
+        "fs400_rukovodstvo_po_ekspluatacii.md#4",
+        "kl12_konveyer_poisk_neispravnostey.md#2",
+        "plk200_reglament_obsluzhivaniya.md#1"
+      ],
+      "cited_docs": [
+        "plk200_reglament_obsluzhivaniya.md"
+      ],
+      "recall_at_k": 1.0,
+      "hit_rate": 1.0,
+      "mrr": 0.5,
+      "token_f1": 0.06451612903225805,
+      "must_include_coverage": 1.0,
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "refusal_correct": true,
+      "latency_s": 0.0006004999740980566,
+      "chunk_recall_at_k": 1.0,
+      "chunk_hit_rate": 1.0,
+      "chunk_mrr": 0.5,
+      "tags": [
+        "technical_control"
+      ],
+      "answerable": true,
+      "judge": null
+    }
+  ]
+}

@@ -58,8 +58,16 @@ class RetrievalConfig:
     top_k: int = 5  # сколько фрагментов попадёт в контекст модели
     candidates: int = 20  # сколько кандидатов берём из каждого поиска перед слиянием
     hybrid: bool = True  # объединять векторный и лексический (BM25) поиск
+    bm25_normalization: str = "token"  # token — исходные словоформы; lemma — русские леммы pymorphy3
     rrf_k: int = 60  # константа Reciprocal Rank Fusion
     min_score: float = 0.0  # отсечка по RRF-скору (0 — без отсечки); шкала: максимум 2/(rrf_k+1) ≈ 0.033
+
+    def __post_init__(self) -> None:
+        if self.bm25_normalization not in {"token", "lemma"}:
+            raise ValueError(
+                "retrieval.bm25_normalization должен быть 'token' или 'lemma', "
+                f"получено: {self.bm25_normalization!r}"
+            )
 
 
 @dataclass

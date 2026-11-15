@@ -6,12 +6,15 @@
      "question": "Какой код ошибки означает перегрев шпинделя?",
      "reference_answer": "Перегреву шпинделя соответствует код E12.",
      "relevant_docs": ["fs400_manual.md"],
+     "relevant_chunks": ["fs400_manual.md#5"],
      "must_include": ["E12"],
      "answerable": true,
      "tags": ["коды ошибок"]}
 
-Поле ``answerable: false`` помечает вопросы-ловушки, ответа на которые в
-документации нет: правильное поведение — отказ, а не выдумка.
+Поле ``relevant_chunks`` необязательно: если оно заполнено, дополнительно
+считаются метрики поиска на уровне фрагментов. Поле ``answerable: false``
+помечает вопросы-ловушки, ответа на которые в документации нет: правильное
+поведение — отказ, а не выдумка.
 """
 
 from __future__ import annotations
@@ -31,6 +34,7 @@ class EvalSample:
     question: str
     reference_answer: str = ""
     relevant_docs: list[str] = field(default_factory=list)
+    relevant_chunks: list[str] = field(default_factory=list)
     must_include: list[str] = field(default_factory=list)
     answerable: bool = True
     tags: list[str] = field(default_factory=list)
