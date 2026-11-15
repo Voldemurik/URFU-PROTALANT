@@ -16,7 +16,7 @@
   <img alt="Ollama" src="https://img.shields.io/badge/LLM-Ollama%20%C2%B7%20local-000000">
   <img alt="Ruff" src="https://img.shields.io/badge/code%20style-ruff-261230">
   <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
-  <img alt="Status" src="https://img.shields.io/badge/status-этап%201%20%C2%B7%20запуск%20на%20реальной%20модели-yellow">
+  <img alt="Status" src="https://img.shields.io/badge/status-этап%203%20%C2%B7%20Повышение%20качества%20поиска%20и%20обработки%20PDF-yellow">
 </p>
 
 <p align="center">
