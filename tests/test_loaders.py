@@ -19,6 +19,52 @@ from techdoc_assistant.rag import IndexMismatchError, RagPipeline
 TEXT = "Регламент обслуживания: проверка затяжки клемм ежемесячно.\n"
 
 
+def _make_pdf(page_texts: list[str]) -> bytes:
+    """Собрать минимальный валидный PDF с текстом (без внешних зависимостей).
+
+    В проекте нет reportlab/fpdf, поэтому PDF собирается вручную: объекты
+    каталога, страниц, шрифта и текстовых потоков с корректной таблицей xref.
+    Пустая строка даёт страницу без текста — как скан или пустая страница.
+    """
+    def esc(text: str) -> str:
+        return text.replace("\\", r"\\").replace("(", r"\(").replace(")", r"\)")
+
+    n = len(page_texts)
+    page_ids = [3 + i for i in range(n)]
+    content_ids = [3 + n + i for i in range(n)]
+    font_id = 3 + 2 * n
+    objects: dict[int, bytes] = {
+        1: b"<< /Type /Catalog /Pages 2 0 R >>",
+        font_id: b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    }
+    kids = " ".join(f"{oid} 0 R" for oid in page_ids)
+    objects[2] = f"<< /Type /Pages /Kids [{kids}] /Count {n} >>".encode()
+    for i, text in enumerate(page_texts):
+        objects[page_ids[i]] = (
+            f"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] "
+            f"/Resources << /Font << /F1 {font_id} 0 R >> >> /Contents {content_ids[i]} 0 R >>"
+        ).encode()
+        stream = f"BT /F1 12 Tf 72 720 Td ({esc(text)}) Tj ET".encode()
+        objects[content_ids[i]] = (
+            f"<< /Length {len(stream)} >>\nstream\n".encode() + stream + b"\nendstream"
+        )
+
+    out = bytearray(b"%PDF-1.4\n")
+    offsets: dict[int, int] = {}
+    for oid in sorted(objects):
+        offsets[oid] = len(out)
+        out += f"{oid} 0 obj\n".encode() + objects[oid] + b"\nendobj\n"
+    xref_pos = len(out)
+    max_id = max(objects)
+    out += f"xref\n0 {max_id + 1}\n".encode() + b"0000000000 65535 f \n"
+    for oid in range(1, max_id + 1):
+        out += f"{offsets[oid]:010d} 00000 n \n".encode()
+    out += (
+        f"trailer\n<< /Size {max_id + 1} /Root 1 0 R >>\nstartxref\n{xref_pos}\n%%EOF\n"
+    ).encode()
+    return bytes(out)
+
+
 @pytest.mark.parametrize("encoding", ["utf-8", "utf-8-sig", "cp1251", "koi8-r", "utf-16"])
 def test_read_text_guesses_encoding(tmp_path: Path, encoding: str):
     path = tmp_path / f"doc-{encoding}.txt"
@@ -82,6 +128,15 @@ def test_label_and_index_text_skip_duplicate_title():
     chunk.section = "Коды ошибок"
     assert chunk.label() == "Руководство › Коды ошибок"
     assert chunk.index_text() == "Руководство\nКоды ошибок\nТекст"
+
+
+def test_label_appends_pdf_page_number():
+    chunk = Chunk(chunk_id="d#0", doc_id="d.pdf", source="d.pdf", text="Текст", position=0, title="Руководство", section="Коды ошибок")
+    assert chunk.label() == "Руководство › Коды ошибок"
+    chunk.metadata = {"page_start": 5, "page_end": 5}
+    assert chunk.label() == "Руководство › Коды ошибок (стр. 5)"
+    chunk.metadata = {"page_start": 5, "page_end": 7}
+    assert chunk.label() == "Руководство › Коды ошибок (стр. 5–7)"
 
 
 @pytest.mark.parametrize(
@@ -192,3 +247,39 @@ def test_toc_lines_with_spaced_dot_leaders_are_not_converted_to_table():
     )
 
     assert _layout_tables_to_markdown(text) == text
+
+
+def test_pdf_document_carries_page_map(tmp_path: Path):
+    """Загруженный PDF хранит карту смещений: (позиция в тексте, номер страницы)."""
+    path = tmp_path / "manual.pdf"
+    path.write_bytes(_make_pdf(["First page content.", "Second page content."]))
+
+    docs = load_documents([path])
+
+    assert len(docs) == 1
+    page_map = docs[0].metadata["page_map"]
+    assert page_map[0] == (0, 1)
+    assert page_map[1][1] == 2
+    assert docs[0].text[page_map[1][0]:].startswith("Second page content.")
+
+
+def test_pdf_empty_page_keeps_original_numbering(tmp_path: Path):
+    """Пустая страница пропускается, но номера остальных страниц не сдвигаются."""
+    path = tmp_path / "manual.pdf"
+    path.write_bytes(_make_pdf(["Page one content.", "", "Page three content."]))
+
+    docs = load_documents([path])
+
+    page_map = docs[0].metadata["page_map"]
+    assert [number for _, number in page_map] == [1, 3]
+    assert docs[0].text[page_map[1][0]:].startswith("Page three content.")
+
+
+def test_text_document_has_no_page_map(tmp_path: Path):
+    """Только PDF даёт карту страниц; текстовые документы неизменны."""
+    path = tmp_path / "reglament.md"
+    path.write_text("# Регламент\n\nПроверка ежемесячно.\n", encoding="utf-8")
+
+    docs = load_documents([path])
+
+    assert "page_map" not in docs[0].metadata
