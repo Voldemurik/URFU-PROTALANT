@@ -283,3 +283,27 @@ def test_text_document_has_no_page_map(tmp_path: Path):
     docs = load_documents([path])
 
     assert "page_map" not in docs[0].metadata
+
+
+def test_pdf_first_page_empty_keeps_numbering(tmp_path: Path):
+    """Пустая первая страница: содержимое второй страницы получает номер 2."""
+    path = tmp_path / "manual.pdf"
+    path.write_bytes(_make_pdf(["", "Content on page two."]))
+
+    docs = load_documents([path])
+
+    assert docs[0].metadata["page_map"] == [(0, 2)]
+
+
+def test_docx_document_has_no_page_numbers(tmp_path: Path):
+    docx = pytest.importorskip("docx")
+    document = docx.Document()
+    document.add_paragraph("Регламент обслуживания оборудования.")
+    path = tmp_path / "reglament.docx"
+    document.save(str(path))
+
+    docs = load_documents([path])
+    chunks = split_document(docs[0], ChunkingConfig())
+
+    assert "page_map" not in docs[0].metadata
+    assert all("page_start" not in c.metadata for c in chunks)
