@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import re
+from bisect import bisect_right
 from collections.abc import Iterable
 
 from techdoc_assistant.config import ChunkingConfig
@@ -23,8 +24,17 @@ def split_document(doc: Document, cfg: ChunkingConfig | None = None) -> list[Chu
     """Разбить документ на чанки согласно конфигурации."""
     cfg = cfg or ChunkingConfig()
     pieces = _merge_tiny(list(_iter_chunk_texts(doc.text, cfg)), cfg.min_chunk_size)
+    page_map = doc.metadata.get("page_map") or []
     chunks: list[Chunk] = []
-    for position, (section, text) in enumerate(pieces):
+    for position, (section, text, start, end) in enumerate(pieces):
+        metadata = dict(doc.metadata)
+        # Карта страниц нужна только на этапе разбиения; дублировать её
+        # в каждый чанк индекса нельзя — она одна на весь документ.
+        metadata.pop("page_map", None)
+        if page_map and start is not None and end is not None:
+            page_start, page_end = _pages_for_span(page_map, start, end)
+            metadata["page_start"] = page_start
+            metadata["page_end"] = page_end
         chunks.append(
             Chunk(
                 chunk_id=f"{doc.doc_id}#{position}",
@@ -34,25 +44,38 @@ def split_document(doc: Document, cfg: ChunkingConfig | None = None) -> list[Chu
                 position=position,
                 title=doc.title,
                 section=section,
-                metadata=dict(doc.metadata),
+                metadata=metadata,
             )
         )
     return chunks
 
 
-def _merge_tiny(pieces: list[tuple[str, str]], min_size: int) -> list[tuple[str, str]]:
+def _pages_for_span(page_map: list, start: int, end: int) -> tuple[int, int]:
+    """Номера страниц, на которые попадает диапазон [start, end) текста документа."""
+    offsets = [offset for offset, _ in page_map]
+    first = max(bisect_right(offsets, start) - 1, 0)
+    last = max(bisect_right(offsets, max(start, end - 1)) - 1, first)
+    return page_map[first][1], page_map[last][1]
+
+
+def _merge_tiny(pieces: list[tuple], min_size: int) -> list[tuple]:
     """Короткие «хвосты» раздела приклеиваем к предыдущему чанку того же раздела.
 
     Короткий чанк с собственным заголовком не трогаем: одинокая строка под
     заголовком — это всё же отдельный раздел, и ссылка на него должна быть точной.
     """
-    merged: list[tuple[str, str]] = []
-    for section, text in pieces:
+    merged: list[tuple] = []
+    for section, text, start, end in pieces:
         if merged and len(text) < min_size and section == merged[-1][0]:
-            prev_section, prev_text = merged[-1]
-            merged[-1] = (prev_section, f"{prev_text}\n\n{text}")
+            prev_section, prev_text, prev_start, prev_end = merged[-1]
+            merged[-1] = (
+                prev_section,
+                f"{prev_text}\n\n{text}",
+                prev_start,
+                end if end is not None else prev_end,
+            )
         else:
-            merged.append((section, text))
+            merged.append((section, text, start, end))
     return merged
 
 
@@ -64,9 +87,14 @@ def split_documents(docs: Iterable[Document], cfg: ChunkingConfig | None = None)
 
 
 def _iter_chunk_texts(text: str, cfg: ChunkingConfig):
-    """Отдаёт пары (заголовок раздела, текст чанка)."""
+    """Отдаёт (заголовок раздела, текст чанка, начало, конец).
+
+    Начало и конец — смещения содержимого чанка в исходном тексте документа;
+    по ним чанку назначаются номера страниц. Перекрытие (хвост предыдущего
+    чанка) в диапазон не входит: ссылка должна вести на новое содержимое.
+    """
     blocks = _split_into_blocks(text)
-    buffer: list[str] = []
+    buffer: list[tuple[str, int | None, int | None]] = []
     buffer_len = 0
     current_section = ""
     buffer_section = ""
@@ -75,69 +103,114 @@ def _iter_chunk_texts(text: str, cfg: ChunkingConfig):
         nonlocal buffer, buffer_len
         if not buffer:
             return None
-        chunk_text = "\n\n".join(buffer).strip()
+        chunk_text = "\n\n".join(piece for piece, _, _ in buffer).strip()
+        spans = [(s, e) for _, s, e in buffer if s is not None and e is not None]
+        start = min((s for s, _ in spans), default=None)
+        end = max((e for _, e in spans), default=None)
         buffer, buffer_len = [], 0
-        return chunk_text
+        return chunk_text, start, end
 
-    for is_heading, block in blocks:
+    for is_heading, block, block_start in blocks:
         if is_heading:
             # Заголовок начинает новый раздел: закрываем предыдущий чанк.
             done = flush()
             if done:
-                yield buffer_section, done
+                yield buffer_section, *done
             current_section = block
             buffer_section = current_section
             continue
 
-        pieces = _split_long_block(block, cfg.chunk_size)
-        for piece in pieces:
+        cursor = block_start
+        for piece in _split_long_block(block, cfg.chunk_size):
+            start, end = _locate(piece, text, cursor)
+            cursor = max(cursor, end)
             piece_len = len(piece)
             if buffer and buffer_len + piece_len + 2 > cfg.chunk_size:
                 done = flush()
                 if done:
-                    yield buffer_section, done
+                    yield buffer_section, *done
                 # Перекрытие: переносим хвост предыдущего чанка в начало нового
                 # (кроме таблиц — у их кусков и так повторяется шапка).
-                overlap = "" if piece.lstrip().startswith("|") else _tail(done or "", cfg.chunk_overlap)
+                overlap = "" if piece.lstrip().startswith("|") else _tail(done[0] if done else "", cfg.chunk_overlap)
                 if overlap:
-                    buffer.append(overlap)
+                    buffer.append((overlap, None, None))
                     buffer_len = len(overlap)
             if not buffer:
                 buffer_section = current_section
-            buffer.append(piece)
+            buffer.append((piece, start, end))
             buffer_len += piece_len + 2
 
     done = flush()
     if done:
-        yield buffer_section, done
+        yield buffer_section, *done
 
 
-def _split_into_blocks(text: str) -> list[tuple[bool, str]]:
-    """Разделить текст на заголовки и абзацы. Возвращает (is_heading, text)."""
-    blocks: list[tuple[bool, str]] = []
+def _locate(piece: str, text: str, cursor: int) -> tuple[int, int]:
+    """Найти (начало, конец) содержимого куска в тексте, начиная с cursor.
+
+    Куски идут в порядке следования в документе, поэтому поиск от cursor
+    однозначен. Кусок таблицы с повторённой шапкой не лежит в тексте подряд:
+    тогда диапазон восстанавливаем по строкам — шапка остаётся за cursor
+    и в диапазон не попадает.
+    """
+    pos = text.find(piece, cursor)
+    if pos >= 0:
+        return pos, pos + len(piece)
+    start = end = -1
+    scan = cursor
+    for line in piece.splitlines():
+        if not line.strip():
+            continue
+        pos = text.find(line, scan)
+        if pos < 0:
+            continue
+        if start < 0:
+            start = pos
+        end = pos + len(line)
+        scan = end
+    if start < 0:
+        return cursor, cursor
+    return start, end
+
+
+def _split_into_blocks(text: str) -> list[tuple[bool, str, int]]:
+    """Разделить текст на заголовки и абзацы. Возвращает (is_heading, text, offset)."""
+    blocks: list[tuple[bool, str, int]] = []
     paragraph: list[str] = []
+    paragraph_start = 0
+    offset = 0
     in_fence = False  # внутри ```-блока кода «# комментарий» — не заголовок
 
     def close_paragraph():
         if paragraph:
-            blocks.append((False, "\n".join(paragraph).strip()))
+            block = "\n".join(paragraph).strip()
+            start = text.find(block, paragraph_start)
+            blocks.append((False, block, start if start >= 0 else paragraph_start))
             paragraph.clear()
 
-    for line in text.splitlines():
+    for line in text.split("\n"):
+        line_start = offset
+        offset += len(line) + 1
         if line.lstrip().startswith("```"):
             in_fence = not in_fence
+            if not paragraph:
+                paragraph_start = line_start
             paragraph.append(line.rstrip())
             continue
         m = None if in_fence else _HEADING_RE.match(line)
         if m:
             close_paragraph()
-            blocks.append((True, m.group(2).strip()))
+            heading = m.group(2).strip()
+            start = text.find(heading, line_start)
+            blocks.append((True, heading, start if start >= 0 else line_start))
         elif not line.strip() and not in_fence:
             close_paragraph()
         else:
+            if not paragraph:
+                paragraph_start = line_start
             paragraph.append(line.rstrip())
     close_paragraph()
-    return [(h, t) for h, t in blocks if t]
+    return [(h, t, s) for h, t, s in blocks if t]
 
 
 def _split_long_block(block: str, limit: int) -> list[str]:

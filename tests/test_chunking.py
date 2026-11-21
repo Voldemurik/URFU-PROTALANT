@@ -96,7 +96,7 @@ def test_chunks_on_one_pdf_page_get_its_number():
         "Вторая страница: коды ошибок и действия оператора при неисправности.",
         "Третья страница: регламент технического обслуживания и смазки узлов.",
     ])
-    chunks = split_document(doc, ChunkingConfig(chunk_size=80, chunk_overlap=0))
+    chunks = split_document(doc, ChunkingConfig(chunk_size=80, chunk_overlap=0, min_chunk_size=0))
 
     by_page = {c.metadata["page_start"]: c for c in chunks}
     assert by_page[1].metadata["page_end"] == 1
