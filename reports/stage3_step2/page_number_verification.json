@@ -1,0 +1,18 @@
+{
+  "pdf": "docs\\LinuxCNC_Documentation_2.9.pdf",
+  "index_dir": "storage\\index-linuxcnc-pages-offline",
+  "structural": {
+    "chunks_total": 67,
+    "chunks_with_pages": 67,
+    "page_map_pages": 25,
+    "pdf_pages": 25,
+    "page_map_starts_at_zero": true,
+    "page_map_not_in_chunk_metadata": true,
+    "pages_in_range": true,
+    "pages_monotonic": true
+  },
+  "content_verified": 67,
+  "content_total": 67,
+  "content_accuracy": 1.0,
+  "failures": []
+}

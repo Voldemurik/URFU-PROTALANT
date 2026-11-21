@@ -66,10 +66,14 @@ def load_documents(paths: Iterable[str | Path]) -> list[Document]:
 
 def load_file(path: Path, root: Path | None = None) -> Document | None:
     suffix = path.suffix.lower()
+    page_map: list[tuple[int, int]] | None = None
     if suffix in TEXT_SUFFIXES:
         text = read_text(path)
     elif suffix in PDF_SUFFIXES:
-        text = _read_pdf(path)
+        pdf = _read_pdf(path)
+        if pdf is None:
+            return None
+        text, page_map = pdf
     elif suffix in DOCX_SUFFIXES:
         text = _read_docx(path)
     else:
@@ -77,12 +81,15 @@ def load_file(path: Path, root: Path | None = None) -> Document | None:
     if text is None:
         return None
     text = normalize_text(text)
+    metadata: dict = {"suffix": suffix, "chars": len(text)}
+    if page_map is not None:
+        metadata["page_map"] = page_map
     return Document(
         doc_id=make_doc_id(path, root),
         source=str(path),
         text=text,
         title=guess_title(text, fallback=path.stem),
-        metadata={"suffix": suffix, "chars": len(text)},
+        metadata=metadata,
     )
 
 
@@ -277,7 +284,26 @@ def _clean_pdf_pages(pages: list[str]) -> list[str]:
 
     return cleaned_pages
 
-def _read_pdf(path: Path) -> str | None:
+def _assemble_pdf_pages(cleaned_pages: list[str]) -> tuple[str, list[tuple[int, int]]]:
+    """Склеить страницы в текст и вернуть карту «смещение → исходный номер страницы».
+
+    Пустые страницы (сканы, обложки без текстового слоя) в текст не попадают,
+    но нумерация остальных страниц остаётся исходной — как в самом PDF.
+    Смещение указывает на первый символ страницы в склеенном тексте.
+    """
+    parts: list[str] = []
+    page_map: list[tuple[int, int]] = []
+    offset = 0
+    for number, page in enumerate(cleaned_pages, start=1):
+        if not page.strip():
+            continue
+        page_map.append((offset, number))
+        parts.append(page)
+        offset += len(page) + 2  # разделитель страниц "\n\n"
+    return "\n\n".join(parts), page_map
+
+
+def _read_pdf(path: Path) -> tuple[str, list[tuple[int, int]]] | None:
     try:
         from pypdf import PdfReader
     except ImportError:  # pragma: no cover - зависит от окружения
@@ -337,7 +363,7 @@ def _read_pdf(path: Path) -> str | None:
         failed_pages,
     )
 
-    return "\n\n".join(nonempty_pages)
+    return _assemble_pdf_pages(cleaned_pages)
 
 
 def _read_docx(path: Path) -> str | None:

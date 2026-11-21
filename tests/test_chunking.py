@@ -96,7 +96,7 @@ def test_chunks_on_one_pdf_page_get_its_number():
         "Вторая страница: коды ошибок и действия оператора при неисправности.",
         "Третья страница: регламент технического обслуживания и смазки узлов.",
     ])
-    chunks = split_document(doc, ChunkingConfig(chunk_size=80, chunk_overlap=0))
+    chunks = split_document(doc, ChunkingConfig(chunk_size=80, chunk_overlap=0, min_chunk_size=0))
 
     by_page = {c.metadata["page_start"]: c for c in chunks}
     assert by_page[1].metadata["page_end"] == 1
@@ -123,3 +123,47 @@ def test_chunking_keeps_page_map_json_serializable():
     chunks = split_document(doc, ChunkingConfig(chunk_size=500, chunk_overlap=0))
 
     assert json.dumps([c.to_dict() for c in chunks])
+
+
+def test_overlap_from_previous_page_does_not_shift_page_start():
+    page1 = "Текст первой страницы, заполнитель абзаца. " * 4  # ~172 символа, один чанк
+    doc = _pdf_doc([page1, "Уникальный маркер второй страницы."])
+    chunks = split_document(doc, ChunkingConfig(chunk_size=200, chunk_overlap=50, min_chunk_size=0))
+
+    target = next(c for c in chunks if "Уникальный маркер" in c.text)
+    # Перекрытие перенесло хвост первой страницы в начало чанка...
+    assert len(chunks) == 2 and chunks[1] is target
+    assert "Текст первой страницы" in target.text
+    # ...но страница чанка определяется его новым содержимым.
+    assert target.metadata["page_start"] == 2
+    assert target.metadata["page_end"] == 2
+
+
+def test_sentence_split_keeps_page_number_with_overlap():
+    page1 = "Текст первой страницы, заполнитель абзаца. " * 5
+    page2 = " ".join(f"Предложение номер {i} второй страницы." for i in range(30))
+    doc = _pdf_doc([page1, page2])
+    chunks = split_document(doc, ChunkingConfig(chunk_size=200, chunk_overlap=40, min_chunk_size=0))
+
+    content = [c for c in chunks if "Предложение" in c.text]
+    assert len(content) > 3
+    for chunk in content:
+        assert chunk.metadata["page_start"] == 2
+        assert chunk.metadata["page_end"] == 2
+
+
+def test_long_table_split_keeps_page_number():
+    intro = "Вводная страница с описанием документа и правилами безопасности."
+    table = "| Код | Описание ошибки | Действие |\n|---|---|---|\n" + "\n".join(
+        f"| E{i:02d} | Описание ошибки номер {i} | Действие оператора {i} |" for i in range(1, 40)
+    )
+    doc = _pdf_doc([intro, table])
+    chunks = split_document(doc, ChunkingConfig(chunk_size=400, chunk_overlap=0, min_chunk_size=0))
+
+    table_chunks = [c for c in chunks if "| E" in c.text]
+    assert len(table_chunks) > 2
+    for chunk in table_chunks:
+        assert chunk.metadata["page_start"] == 2
+        assert chunk.metadata["page_end"] == 2
+    # Шапка таблицы по-прежнему повторяется в каждом куске.
+    assert all("| Код | Описание ошибки | Действие |" in c.text for c in table_chunks)
